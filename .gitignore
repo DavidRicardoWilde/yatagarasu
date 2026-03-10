@@ -1,0 +1,95 @@
+# macOS Finder
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \\r
+Icon
+
+# Thumbnails
+._*
+
+# Xcode
+DerivedData/
+build/
+*.xcarchive
+*.xcuserstate
+*.xccheckout
+*.xcscmblueprint
+xcuserdata/
+*.xccheckout
+*.moved-aside
+
+# Xcode project user data
+**/xcuserdata/
+**/*.xcuserdatad/
+
+# Xcode generated files
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+.packages
+Package.resolved
+.swiftpm/
+
+# CocoaPods
+Pods/
+Podfile.lock
+
+# Carthage
+Carthage/Build/
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
+fastlane/test_output
+
+# Provisioning and signing
+*.mobileprovision
+*.cer
+*.p12
+*.der
+*.key
+
+# macOS / editor temp files
+*~
+*.swp
+*.swo
+*.tmp
+*.temp
+
+# IDEs
+.vscode/
+.idea/
+
+# User-specific files
+*.lock
+*.log
+.env
+.env.local
+
+# Build artifacts
+/DerivedData/
+**/Build/
+
+# SwiftUI previews & generated assets
+*.preview-thumbnails
+
+# Xcode playgrounds
+timeline.xctimeline
+playground.xcworkspace
+
+# macOS apps
+*.app
+
+# Ignore mcp secrets (if any)
+.vscode/mcp.json
+
+# Ignore entitlements if they contain secrets (adjust if you commit intentionally)
+*.entitlements
+docs/
