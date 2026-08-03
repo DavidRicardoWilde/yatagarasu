@@ -1,0 +1,10 @@
+{
+  "name": "@yatagarasu/windows",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Yatagarasu Windows app (placeholder — coming soon)",
+  "scripts": {
+    "build": "echo 'Yatagarasu Windows app: not yet implemented'",
+    "clean": "echo 'Nothing to clean'"
+  }
+}

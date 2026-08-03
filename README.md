@@ -99,19 +99,32 @@ Yatagarasu is a native Swift application with a small, focused stack:
 
 ## Project structure
 
+Yatagarasu is a **Turborepo monorepo** with platform-specific apps under `apps/`.
+
 ```text
 .
-├── yatagarasu/
-│   ├── yatagarasu.xcodeproj
-│   └── yatagarasu/
-│       ├── ContentView.swift
-│       ├── PackageWorkspace.swift
-│       ├── OpenSourceCatalogWorkspace.swift
-│       ├── Services/
-│       └── Models/
+├── apps/
+│   ├── macos/              # Native macOS app (SwiftUI)
+│   │   ├── package.json
+│   │   ├── yatagarasu.xcodeproj
+│   │   └── yatagarasu/
+│   │       ├── ContentView.swift
+│   │       ├── PackageWorkspace.swift
+│   │       ├── OpenSourceCatalogWorkspace.swift
+│   │       ├── Services/
+│   │       └── Models/
+│   ├── linux/              # Linux app (placeholder, coming soon)
+│   └── windows/            # Windows app (placeholder, coming soon)
+├── package.json            # Root workspace config
+├── turbo.json              # Turborepo pipeline
+└── docs/                   # Architecture & product docs
 ```
 
-The repository currently nests the Xcode project and app sources under the top-level `yatagarasu/` directory.
+### Monorepo tooling
+
+- **Turborepo** orchestrates builds across apps
+- Workspace packages are scoped as `@yatagarasu/<platform>`
+- Run `npm run build` from root to build all apps; `npm run build:macos` for just macOS
 
 ## Getting started
 
@@ -126,11 +139,21 @@ The repository currently nests the Xcode project and app sources under the top-l
 From the repository root:
 
 ```bash
-cd yatagarasu
+# Install dependencies (first time only)
+npm install
+
+# Build all apps
+npm run build
+
+# Build only macOS
+npm run build:macos
+
+# Or build directly with xcodebuild
+cd apps/macos
 xcodebuild -project yatagarasu.xcodeproj -scheme yatagarasu -configuration Debug -destination 'platform=macOS' build
 ```
 
-You can also open `yatagarasu/yatagarasu.xcodeproj` directly in Xcode and run the `yatagarasu` scheme.
+You can also open `apps/macos/yatagarasu.xcodeproj` directly in Xcode and run the `yatagarasu` scheme.
 
 ### Test status
 
@@ -165,7 +188,7 @@ Contributions are welcome, especially around:
 - localization
 - test coverage and developer tooling
 
-If you open a pull request, please verify the project still builds with `xcodebuild` before submitting.
+If you open a pull request, please verify the project still builds with `xcodebuild` or `npm run build` before submitting.
 
 ## License
 

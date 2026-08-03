@@ -1,0 +1,10 @@
+{
+  "name": "@yatagarasu/linux",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Yatagarasu Linux app (placeholder — coming soon)",
+  "scripts": {
+    "build": "echo 'Yatagarasu Linux app: not yet implemented'",
+    "clean": "echo 'Nothing to clean'"
+  }
+}
