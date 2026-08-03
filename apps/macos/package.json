@@ -1,0 +1,10 @@
+{
+  "name": "@yatagarasu/macos",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Yatagarasu macOS app — native SwiftUI package manager frontend",
+  "scripts": {
+    "build": "xcodebuild -project yatagarasu.xcodeproj -scheme yatagarasu -configuration Debug -destination 'platform=macOS' build",
+    "clean": "xcodebuild -project yatagarasu.xcodeproj -scheme yatagarasu -configuration Debug -destination 'platform=macOS' clean"
+  }
+}

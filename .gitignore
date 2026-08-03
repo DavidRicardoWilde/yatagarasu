@@ -93,3 +93,12 @@ playground.xcworkspace
 # Ignore entitlements if they contain secrets (adjust if you commit intentionally)
 *.entitlements
 docs/
+
+# Turborepo
+.turbo/
+node_modules/
+
+# Package manager lockfiles (committed by convention for npm, ignored for others)
+pnpm-lock.yaml
+yarn.lock
+bun.lockb

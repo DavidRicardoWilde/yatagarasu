@@ -103,19 +103,32 @@ Yatagarasu 使用的是一套非常明确的原生技术栈：
 
 ## 项目结构
 
+Yatagarasu 是一个基于 **Turborepo** 的 monorepo，各平台应用位于 `apps/` 下。
+
 ```text
 .
-├── yatagarasu/
-│   ├── yatagarasu.xcodeproj
-│   └── yatagarasu/
-│       ├── ContentView.swift
-│       ├── PackageWorkspace.swift
-│       ├── OpenSourceCatalogWorkspace.swift
-│       ├── Services/
-│       └── Models/
+├── apps/
+│   ├── macos/              # 原生 macOS 应用（SwiftUI）
+│   │   ├── package.json
+│   │   ├── yatagarasu.xcodeproj
+│   │   └── yatagarasu/
+│   │       ├── ContentView.swift
+│   │       ├── PackageWorkspace.swift
+│   │       ├── OpenSourceCatalogWorkspace.swift
+│   │       ├── Services/
+│   │       └── Models/
+│   ├── linux/              # Linux 应用（占位，即将开始）
+│   └── windows/            # Windows 应用（占位，即将开始）
+├── package.json            # 根工作区配置
+├── turbo.json              # Turborepo 流水线
+└── docs/                   # 架构与产品文档
 ```
 
-当前仓库采用嵌套结构：Xcode 工程与应用源码都位于顶层 `yatagarasu/` 目录之下。
+### Monorepo 工具链
+
+- **Turborepo** 编排跨应用构建
+- 工作区包以 `@yatagarasu/<platform>` 命名
+- 根目录执行 `npm run build` 构建全部应用；`npm run build:macos` 仅构建 macOS
 
 ## 如何开始
 
@@ -130,11 +143,21 @@ Yatagarasu 使用的是一套非常明确的原生技术栈：
 在仓库根目录执行：
 
 ```bash
-cd yatagarasu
+# 首次需要安装依赖
+npm install
+
+# 构建全部应用
+npm run build
+
+# 仅构建 macOS
+npm run build:macos
+
+# 或直接用 xcodebuild 构建
+cd apps/macos
 xcodebuild -project yatagarasu.xcodeproj -scheme yatagarasu -configuration Debug -destination 'platform=macOS' build
 ```
 
-也可以直接用 Xcode 打开 `yatagarasu/yatagarasu.xcodeproj`，运行 `yatagarasu` scheme。
+也可以直接用 Xcode 打开 `apps/macos/yatagarasu.xcodeproj`，运行 `yatagarasu` scheme。
 
 ### 测试状态
 
@@ -169,7 +192,7 @@ Yatagarasu 想做的，是在不牺牲原有能力的前提下，把这些工作
 - 本地化
 - 自动化测试与开发工具链
 
-如果你要提交 Pull Request，建议先用 `xcodebuild` 确认项目能够正常构建。
+如果你要提交 Pull Request，建议先用 `xcodebuild` 或 `npm run build` 确认项目能够正常构建。
 
 ## License
 
