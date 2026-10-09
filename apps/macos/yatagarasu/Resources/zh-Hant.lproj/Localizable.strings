@@ -1,0 +1,306 @@
+/* Common */
+"common.comingSoon" = "將於後續更新提供";
+"common.clearSearch" = "清除搜尋";
+"common.unknown" = "未知";
+"common.expanded" = "已展開";
+"common.collapsed" = "已收合";
+
+/* Menu commands */
+"command.search" = "搜尋";
+"command.menu.packages" = "套件";
+"command.rescan" = "重新掃描已安裝軟體";
+
+/* Sidebar */
+"sidebar.discover.title" = "探索";
+"sidebar.installed.title" = "已安裝";
+"sidebar.updates.title" = "更新";
+"sidebar.setups.title" = "裝機";
+
+/* Activity */
+"activity.title" = "活動";
+"activity.idle" = "全部完成";
+"activity.inQueue.one" = "佇列中 %d 項";
+"activity.inQueue.other" = "佇列中 %d 項";
+"activity.waiting.one" = "還有 %d 項等待中";
+"activity.waiting.other" = "還有 %d 項等待中";
+"activity.clear" = "清除已完成";
+"activity.empty" = "目前沒有正在安裝的項目。";
+"activity.card.hint" = "顯示最近安裝、更新與移除的指令輸出。";
+"activity.state.queued" = "排隊中";
+"activity.state.done" = "完成";
+"activity.state.failed" = "失敗";
+
+/* Discover */
+"discover.search.prompt" = "搜尋 App、工具、儲存庫";
+"discover.search.resultCount.one" = "%d 個結果";
+"discover.search.resultCount.other" = "%d 個結果";
+"discover.search.empty.title_format" = "沒有「%@」的結果";
+"discover.search.empty.body" = "換個名稱試試。搜尋所有 Homebrew 軟體將於後續更新提供。";
+"discover.hero.eyebrow" = "新 Mac？";
+"discover.hero.title" = "一次裝好所有軟體。";
+"discover.hero.body" = "選一個入門套組，Yatagarasu 會將每項安裝依序排入佇列。";
+"discover.hero.chooseKit" = "選擇入門套組…";
+"discover.section.starterKits" = "入門套組";
+"discover.section.popular" = "本週熱門";
+"discover.section.openSource" = "GitHub 開源專案";
+"discover.action.seeAllKits" = "查看全部";
+"discover.action.get" = "取得";
+
+/* Catalog */
+"catalog.sourceCount.one" = "%d 個來源";
+"catalog.sourceCount.other" = "%d 個來源";
+"catalog.item.ghostty.summary" = "快速的原生終端機模擬器";
+"catalog.item.orbstack.summary" = "為 Apple 晶片最佳化的容器與 Linux 虛擬機";
+"catalog.item.raycast.summary" = "啟動器與快速動作";
+"catalog.item.wezterm.summary" = "內建多工的 GPU 加速終端機";
+"catalog.item.zed.summary" = "高效能的協作程式碼編輯器";
+"catalog.item.rectangle.summary" = "用快速鍵擺放視窗";
+"catalog.item.stats.summary" = "選單列中的系統監視器";
+"catalog.item.iina.summary" = "專為 macOS 打造的現代媒體播放器";
+"catalog.item.git.summary" = "分散式版本控制";
+"catalog.item.node.summary" = "用於工具與伺服器的 JavaScript 執行環境";
+"catalog.item.gh.summary" = "命令列中的 GitHub";
+"catalog.item.jq.summary" = "擷取、篩選與重塑 JSON";
+"catalog.item.vscode.summary" = "Microsoft 出品的可擴充程式碼編輯器";
+"catalog.item.figma.summary" = "協作式介面設計";
+"catalog.item.inkscape.summary" = "專業的向量繪圖編輯器";
+"catalog.item.blender.summary" = "開源 3D 創作套件";
+"catalog.item.imageoptim.summary" = "壓縮圖片且不損失可見畫質";
+"catalog.item.uv.summary" = "快速的 Python 套件與專案管理器";
+"catalog.item.jupyterlab.summary" = "用於程式碼、資料與寫作的筆記本";
+"catalog.item.duckdb.summary" = "用於分析的程序內 SQL 資料庫";
+"catalog.item.ffmpeg.summary" = "錄製、轉換與串流影音";
+"catalog.item.audacity.summary" = "多軌音訊編輯與錄音";
+"catalog.item.obs.summary" = "直播與螢幕錄影工作室";
+"catalog.item.nmap.summary" = "網路探索與安全稽核";
+"catalog.item.lulu.summary" = "開源的出站防火牆";
+"catalog.item.skhd.summary" = "簡潔的 macOS 快速鍵常駐程式";
+
+/* Setups and starter kits */
+"setups.subtitle" = "一次安裝整套工具。";
+"setups.action.importBrewfile" = "匯入 Brewfile…";
+"setups.action.installMissing.one" = "安裝缺少的 %d 項";
+"setups.action.installMissing.other" = "安裝缺少的 %d 項";
+"setups.action.allInstalled" = "已全部安裝";
+"setups.kit.count.tools.one" = "%d 個工具";
+"setups.kit.count.tools.other" = "%d 個工具";
+"setups.kit.count.apps.one" = "%d 個 App";
+"setups.kit.count.apps.other" = "%d 個 App";
+"setups.kit.webDeveloper.title" = "Web 開發者";
+"setups.kit.webDeveloper.blurb" = "版本控制、Node.js、容器與現代編輯器。";
+"setups.kit.designer.title" = "設計師";
+"setups.kit.designer.blurb" = "介面設計、向量插畫、3D 與圖片最佳化。";
+"setups.kit.dataAndAI.title" = "資料與 AI";
+"setups.kit.dataAndAI.blurb" = "Python 環境、筆記本與快速的本機分析。";
+"setups.kit.creator.title" = "音訊與影片";
+"setups.kit.creator.blurb" = "錄製、剪輯、轉換與直播。";
+"setups.kit.itAdmin.title" = "IT 與安全";
+"setups.kit.itAdmin.blurb" = "網路掃描、出站防火牆與系統監控。";
+"setups.kit.everydayMac.title" = "日常 Mac";
+"setups.kit.everydayMac.blurb" = "讓任何 Mac 更好用的小工具。";
+
+/* Specialties */
+"specialty.development.title" = "軟體開發";
+"specialty.development.blurb" = "語言版本、原始碼建置、開發者套組";
+"specialty.creative.title" = "設計與創意";
+"specialty.creative.blurb" = "字體、色彩工具、創意套件與外掛";
+"specialty.data.title" = "資料與研究";
+"specialty.data.blurb" = "Python 與 R 環境、筆記本、分析工具";
+"specialty.media.title" = "音訊與影片";
+"specialty.media.blurb" = "編解碼器、音訊外掛、驅動程式與擷取工具";
+"specialty.administration.title" = "IT 與安全";
+"specialty.administration.blurb" = "管理工具、掃描器、簽章與裝置原則";
+
+/* Installed */
+"installed.subtitle" = "此 Mac 上的 Homebrew 套件與 GitHub 安裝";
+"installed.action.exportBrewfile" = "匯出 Brewfile…";
+"installed.action.rescan" = "重新掃描";
+"installed.action.details" = "詳細資訊";
+"installed.action.showInFinder" = "在 Finder 中顯示";
+"installed.filter.label" = "顯示";
+"installed.filter.all" = "全部";
+"installed.filter.apps" = "App";
+"installed.filter.commandLine" = "命令列";
+"installed.filter.prompt" = "篩選";
+"installed.hideDependencies" = "隱藏相依項目";
+"installed.column.name" = "名稱";
+"installed.column.version" = "版本";
+"installed.column.source" = "來源";
+"installed.column.status" = "狀態";
+"installed.status.upToDate" = "已是最新";
+"installed.status.update" = "可更新";
+"installed.status.tracked" = "已記錄";
+"installed.detail.location" = "位置";
+"installed.detail.source" = "安裝來源";
+"installed.detail.type" = "類型";
+"installed.detail.available" = "可用版本";
+"installed.detail.about" = "簡介";
+"installed.empty.title" = "尚未安裝任何內容";
+"installed.empty.body" = "從「探索」安裝後，就會顯示在這裡。";
+"installed.noMatches.title" = "沒有相符項目";
+"installed.noMatches.body" = "沒有符合此篩選條件的已安裝項目。";
+"installed.uninstall.confirm.title_format" = "要移除 %@ 嗎？";
+"installed.uninstall.confirm.body" = "Homebrew 會將其從此 Mac 移除。你隨時可以重新安裝。";
+
+/* Updates */
+"updates.subtitle.none" = "全部已是最新";
+"updates.subtitle.ready.one" = "%d 個更新可用";
+"updates.subtitle.ready.other" = "%d 個更新可用";
+"updates.subtitle.major.one" = "%d 個需要先確認";
+"updates.subtitle.major.other" = "%d 個需要先確認";
+"updates.action.checkNow" = "立即檢查";
+"updates.action.updateSelected.one" = "更新 %d 項";
+"updates.action.updateSelected.other" = "更新 %d 項";
+"updates.majorBanner.title" = "主要版本更新預設不勾選。";
+"updates.majorBanner.body" = "它們可能改變工具的行為，請在更新前先確認。";
+"updates.empty.title" = "全部已是最新";
+"updates.empty.body" = "目前沒有需要更新的 Homebrew 套件。";
+"updates.select_format" = "更新 %@";
+"updates.change.major" = "主要";
+"updates.change.minor" = "次要";
+"updates.change.patch" = "修補";
+"updates.change.unknown" = "更新";
+
+/* Package detail */
+"detail.waysToGet.one" = "%d 種取得方式";
+"detail.waysToGet.other" = "%d 種取得方式";
+"detail.sources.title" = "取得來源";
+"detail.version.title" = "版本";
+"detail.version.latest" = "最新版本";
+"detail.version.latest_format" = "%@（最新）";
+"detail.version.keepCurrent" = "同時保留目前版本";
+"detail.safety.title" = "安全檢查";
+"detail.about.title" = "簡介";
+"detail.about.empty" = "README 尚未下載。";
+"detail.project.title" = "GitHub";
+"detail.project.stars" = "星號";
+"detail.project.language" = "語言";
+"detail.project.branch" = "預設分支";
+"detail.project.synced" = "同步時間";
+"detail.project.refresh" = "從 GitHub 重新整理";
+"detail.project.viewOnGitHub" = "在 GitHub 上檢視";
+"detail.action.installWithHomebrew" = "使用 Homebrew 安裝";
+"detail.action.openWebsite" = "開啟網站";
+"detail.action.download" = "下載";
+"detail.action.viewRelease" = "檢視發行版本";
+"detail.action.viewBuildInstructions" = "檢視建置說明";
+
+/* Install sources */
+"source.homebrewCask.title" = "Homebrew Cask";
+"source.homebrewCask.note" = "社群維護的配方，透過 Yatagarasu 更新";
+"source.homebrewFormula.title" = "Homebrew";
+"source.homebrewFormula.note" = "由 Homebrew 維護，透過 Yatagarasu 更新";
+"source.website.title" = "官方網站";
+"source.website.note_format" = "來自 %@ 的安裝程式";
+"source.githubRelease.title" = "GitHub 發行版本";
+"source.githubRelease.note" = "專案發布的安裝程式";
+"source.githubRelease.unavailable" = "最近的發行版本中沒有 macOS 安裝程式";
+"source.sourceBuild.title" = "從原始碼建置";
+"source.sourceBuild.note" = "在此 Mac 上從公開儲存庫編譯";
+"source.chip.checksumVerified" = "總和檢查碼已驗證";
+"source.chip.opensBrowser" = "在瀏覽器中開啟";
+"source.chip.unverified" = "未驗證";
+"source.chip.unavailable" = "無法使用";
+"source.chip.advanced" = "進階";
+
+/* Safety check */
+"safety.checksum.title" = "總和檢查碼已驗證";
+"safety.checksum.body" = "Homebrew 會在安裝前將下載內容與配方核對。";
+"safety.bottled.title" = "已為你的 Mac 預先建置";
+"safety.bottled.body" = "若有適用於你的 macOS 的預先建置版本，Homebrew 會直接安裝。";
+"safety.vendorDownload.title" = "從開發者處下載";
+"safety.vendorDownload.body" = "配方指向開發者自己的檔案。";
+"safety.easyRemoval.title" = "容易移除";
+"safety.easyRemoval.body" = "隨時可在「已安裝」中移除。";
+"safety.fromDeveloper.title" = "來自開發者";
+"safety.fromDeveloper.body" = "從官方網站下載安裝程式。";
+"safety.gatekeeper.title" = "由 macOS 檢查";
+"safety.gatekeeper.body" = "首次開啟時，Gatekeeper 會驗證此 App。";
+"safety.manualUpdates.title" = "在 Yatagarasu 之外更新";
+"safety.manualUpdates.body" = "App 會自行更新，或需要你手動更新。";
+"safety.fromProject.title" = "由專案發布";
+"safety.fromProject.body" = "檔案來自專案自己的 GitHub 發行版本。";
+"safety.notVerified.title" = "未經 Yatagarasu 驗證";
+"safety.notVerified.body" = "首次開啟時，macOS 可能會要求你確認。";
+"safety.readableCode.title" = "程式碼公開可查";
+"safety.readableCode.body" = "從公開儲存庫依你選擇的版本建置。";
+"safety.needsTools.title" = "需要開發者工具";
+"safety.needsTools.body" = "建置通常需要 Xcode 命令列工具。";
+"safety.takesTime.title" = "需要一些時間";
+"safety.takesTime.body" = "請依照 GitHub 上專案的建置說明操作。";
+
+/* Packages */
+"packages.unavailable.title" = "需要 Homebrew。";
+"packages.unavailable.body" = "安裝 Homebrew 後才能安裝、更新與移除套件。";
+"packages.error.title" = "發生問題。";
+"packages.loading" = "正在載入 Homebrew 套件…";
+"packages.status.installed" = "已安裝";
+"packages.status.notInstalled" = "未安裝";
+"packages.action.install" = "安裝";
+"packages.action.update" = "更新";
+"packages.action.uninstall" = "移除";
+"packages.kind.formula" = "Formula";
+"packages.kind.cask" = "Cask";
+"packages.operation.install" = "安裝";
+"packages.operation.update" = "更新";
+"packages.operation.uninstall" = "移除";
+"packages.progress.stage.queued" = "排隊中";
+"packages.progress.stage.resolving" = "解析相依項目";
+"packages.progress.stage.downloading" = "下載中";
+"packages.progress.stage.installing" = "安裝中";
+"packages.progress.stage.updating" = "更新中";
+"packages.progress.stage.removing" = "移除中";
+"packages.progress.stage.cleaningUp" = "清理中";
+"packages.progress.stage.finishing" = "即將完成";
+"packages.progress.stage.completed" = "已完成";
+"packages.progress.stage.failed" = "失敗";
+
+/* GitHub releases (model-level labels) */
+"openSource.installSource.homebrew" = "Homebrew";
+"openSource.installSource.githubRelease" = "GitHub 發行版本";
+"openSource.installSource.sourceBuild" = "原始碼建置";
+"openSource.release.arch.appleSilicon" = "Apple 晶片";
+"openSource.release.arch.intel" = "Intel";
+"openSource.release.arch.universal" = "通用";
+"openSource.release.arch.generic" = "macOS";
+"openSource.release.action.downloadDmg" = "下載 DMG";
+"openSource.release.action.downloadPkg" = "下載 PKG";
+"openSource.release.action.downloadZip" = "下載 ZIP";
+
+/* Settings */
+"settings.tab.general" = "一般";
+"settings.tab.specialties" = "專長";
+"settings.tab.sources" = "來源";
+"settings.tab.updates" = "更新";
+"settings.language.label" = "語言";
+"settings.language.footer" = "變更 Yatagarasu 使用的語言，與 Mac 的系統語言無關。";
+"settings.language.option.en" = "英文";
+"settings.language.option.zhHans" = "簡體中文";
+"settings.language.option.zhHant" = "繁體中文";
+"settings.language.option.ja" = "日文";
+"settings.specialties.intro" = "開啟適合你工作的專長。專長會改變 Yatagarasu 優先顯示的內容，所有項目仍可透過搜尋找到。";
+"settings.specialties.effects.title" = "對你的影響";
+"settings.specialties.effects.none" = "未開啟額外專長。你會看到標準的「探索」「已安裝」與「更新」頁面。";
+"settings.specialties.effects.kits" = "優先顯示的入門套組";
+"settings.sources.homebrew.title" = "Homebrew";
+"settings.sources.status" = "狀態";
+"settings.sources.location" = "位置";
+"settings.homebrew.checking" = "正在檢查…";
+"settings.homebrew.detected" = "已偵測到";
+"settings.homebrew.not_configured" = "未在此 Mac 上找到";
+"settings.homebrew.install_hint" = "請從 brew.sh 安裝 Homebrew，或確認 brew 位於 /opt/homebrew/bin 或 /usr/local/bin。";
+"settings.homebrew.recheck" = "重新檢查";
+"settings.parser.validate" = "驗證 JSON 解析器";
+"settings.parser.validating" = "正在驗證…";
+"settings.parser.not_available" = "Homebrew 目前無法使用。";
+"settings.parser.success_format" = "已解析 %d 個 formulae 與 %d 個 cask。範例：%@";
+"settings.parser.failed_format" = "解析器驗證失敗：%@";
+"settings.sources.github.title" = "GitHub";
+"settings.sources.github.access" = "存取方式";
+"settings.sources.github.public" = "公開 API，無須登入";
+"settings.sources.github.cached" = "已快取專案";
+"settings.sources.github.signIn" = "登入 GitHub…";
+"settings.updates.selectMajor" = "自動勾選主要版本更新";
+"settings.updates.selectMajor.footer" = "關閉時，主要版本更新在「更新」中預設不勾選，方便你先確認。";
+"settings.updates.background" = "在背景檢查更新";
+"settings.updates.notify" = "有可用更新時通知我";

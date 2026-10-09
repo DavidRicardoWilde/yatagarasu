@@ -25,42 +25,50 @@ Yatagarasu is currently an actively developed MVP with a working core experience
 - Detects a local Homebrew installation automatically
 - Loads installed formulae and casks through `brew info --json=v2`
 - Supports install, upgrade, and uninstall flows from the UI
-- Tracks active operations with staged progress and a floating command console
+- Tracks active operations with staged progress; the sidebar Activity card opens live `brew` output
 - Filters installed formulae to hide dependency-only installs unless the user explicitly installed them
 
 ### Open-source discovery
 
-- Includes a dedicated **Open Source** section for curated GitHub projects
+- Curated GitHub projects appear on **Discover** and open in the shared package detail page
 - Fetches repository metadata, README content, and recent releases from the GitHub API
 - Renders project READMEs in a native SwiftUI detail experience
 - Parses release assets and prefers installable macOS artifacts such as `.dmg`, `.pkg`, and `.zip`
 - Falls back to a clear “build from source” path when a repository does not publish a suitable binary release
 
-### Unified installed view
+### One app, many sources
 
-- Shows Homebrew-managed packages and tracked GitHub-origin records in one place
-- Preserves installation-source context, including GitHub Release and source-build entry points
-- Surfaces outdated packages and supports batch updates for Homebrew-managed items
+- Each package's detail page lists every place it can come from (Homebrew, official website, GitHub releases, build from source) with a safety check for the selected source
+- **Setups** installs whole starter kits in one go; **Specialties** in Settings decide which kits show first
+
+### Installed and Updates
+
+- **Installed** shows Homebrew-managed packages and tracked GitHub-origin records in one expandable table
+- **Updates** classifies each update as major, minor, or patch and leaves major updates unchecked by default
 
 ### macOS-native UX
 
-- `NavigationSplitView` layout with a glassmorphism-inspired interface
-- Material-backed cards, native typography, and SF Symbols
+- `NavigationSplitView` shell with a calm, light-first design ("Direction A") that adapts to dark mode
+- Design tokens and shared components live in `DesignSystem/`
 - Built-in localization support for English, Simplified Chinese, Traditional Chinese, and Japanese
-- Settings for language selection, Homebrew re-check, parser validation, and command console visibility
+- A standard Settings window (⌘,) with General, Specialties, Sources, and Updates tabs
 
 ## Current scope
 
 Implemented areas:
 
 - **Discover**
-- **Open Source**
 - **Installed**
+- **Updates**
+- **Setups**
+- **Package detail**
 - **Settings**
 
-Still evolving:
+Still evolving (shown in the UI as disabled "coming soon" controls; search the code for `pendingFeature()`):
 
-- **Categories** view content
+- Brewfile import and export
+- Keeping several versions side by side, background update checks, notifications
+- GitHub sign-in and searching all of Homebrew
 - **Developer / Dev-Space** workflows
 - More robust rendering for HTML-heavy READMEs
 - Broader automation around GitHub release installation
@@ -80,8 +88,9 @@ Yatagarasu is a native Swift application with a small, focused stack:
 ### Architecture at a glance
 
 - **UI layer**
-  - `ContentView` hosts the main shell and top-level navigation.
-  - SwiftUI feature views render discovery, installed packages, open-source details, and settings.
+  - `App/RootView` hosts the `NavigationSplitView` shell; `AppRouter` owns sidebar selection and the push stack.
+  - `AppModel` is the composition root and the single entry point views use for install / update / uninstall.
+  - `Features/` holds one folder per screen, built from the tokens and components in `DesignSystem/`.
 
 - **Workspace / state layer**
   - `PackageWorkspace` coordinates Homebrew-backed package state.
@@ -108,11 +117,13 @@ Yatagarasu is a **Turborepo monorepo** with platform-specific apps under `apps/`
 │   │   ├── package.json
 │   │   ├── yatagarasu.xcodeproj
 │   │   └── yatagarasu/
-│   │       ├── ContentView.swift
-│   │       ├── PackageWorkspace.swift
-│   │       ├── OpenSourceCatalogWorkspace.swift
-│   │       ├── Services/
-│   │       └── Models/
+│   │       ├── App/            # Entry point, AppModel, commands, root window
+│   │       ├── Navigation/     # Sidebar destinations and router
+│   │       ├── DesignSystem/   # Tokens (color, type, spacing) and shared components
+│   │       ├── Catalog/        # Curated items, starter kits, specialties
+│   │       ├── Features/       # Discover, Installed, Updates, Setups, PackageDetail, Settings, Sidebar
+│   │       ├── Core/           # Models, services, workspaces, Homebrew detection, localization
+│   │       └── Resources/      # Assets and Localizable.strings (en, ja, zh-Hans, zh-Hant)
 │   ├── linux/              # Linux app (placeholder, coming soon)
 │   └── windows/            # Windows app (placeholder, coming soon)
 ├── package.json            # Root workspace config
@@ -163,7 +174,7 @@ The repository currently does not expose a fully configured automated test actio
 
 Yatagarasu already provides a solid core workflow, but it is still early in its lifecycle. A few areas are intentionally in progress:
 
-- Some sidebar destinations are placeholders rather than complete product areas.
+- Some controls from the design are placeholders until their backends exist (see `pendingFeature()`).
 - HTML-heavy GitHub READMEs are not yet rendered with a dedicated fallback path.
 - GitHub integration currently focuses on discovery, release inspection, and install-source tracking rather than end-to-end managed installation for every repository.
 - Homebrew-backed workflows naturally depend on a valid local Homebrew installation.

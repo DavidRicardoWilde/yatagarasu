@@ -1,0 +1,306 @@
+/* Common */
+"common.comingSoon" = "今後のアップデートで対応予定";
+"common.clearSearch" = "検索をクリア";
+"common.unknown" = "不明";
+"common.expanded" = "展開済み";
+"common.collapsed" = "折りたたみ済み";
+
+/* Menu commands */
+"command.search" = "検索";
+"command.menu.packages" = "パッケージ";
+"command.rescan" = "インストール済みソフトウェアを再スキャン";
+
+/* Sidebar */
+"sidebar.discover.title" = "発見";
+"sidebar.installed.title" = "インストール済み";
+"sidebar.updates.title" = "アップデート";
+"sidebar.setups.title" = "セットアップ";
+
+/* Activity */
+"activity.title" = "アクティビティ";
+"activity.idle" = "すべて完了";
+"activity.inQueue.one" = "待機 %d 件";
+"activity.inQueue.other" = "待機 %d 件";
+"activity.waiting.one" = "ほかに %d 件が待機中";
+"activity.waiting.other" = "ほかに %d 件が待機中";
+"activity.clear" = "完了した項目を消去";
+"activity.empty" = "現在インストール中の項目はありません。";
+"activity.card.hint" = "最近のインストール、更新、削除のコマンド出力を表示します。";
+"activity.state.queued" = "待機中";
+"activity.state.done" = "完了";
+"activity.state.failed" = "失敗";
+
+/* Discover */
+"discover.search.prompt" = "アプリ、ツール、リポジトリを検索";
+"discover.search.resultCount.one" = "%d 件の結果";
+"discover.search.resultCount.other" = "%d 件の結果";
+"discover.search.empty.title_format" = "「%@」の結果はありません";
+"discover.search.empty.body" = "別の名前で試してください。Homebrew 全体の検索は今後のアップデートで対応予定です。";
+"discover.hero.eyebrow" = "新しい Mac？";
+"discover.hero.title" = "まとめて一度にセットアップ。";
+"discover.hero.body" = "スターターキットを選ぶだけで、Yatagarasu がすべてのインストールを順番にキューに追加します。";
+"discover.hero.chooseKit" = "スターターキットを選ぶ…";
+"discover.section.starterKits" = "スターターキット";
+"discover.section.popular" = "今週の人気";
+"discover.section.openSource" = "GitHub のオープンソース";
+"discover.action.seeAllKits" = "すべて表示";
+"discover.action.get" = "入手";
+
+/* Catalog */
+"catalog.sourceCount.one" = "入手先 %d";
+"catalog.sourceCount.other" = "入手先 %d";
+"catalog.item.ghostty.summary" = "高速でネイティブなターミナルエミュレータ";
+"catalog.item.orbstack.summary" = "Apple シリコン向けに最適化されたコンテナと Linux マシン";
+"catalog.item.raycast.summary" = "ランチャーとクイックアクション";
+"catalog.item.wezterm.summary" = "多重化機能を内蔵した GPU アクセラレーション対応ターミナル";
+"catalog.item.zed.summary" = "高速でコラボレーションに強いコードエディタ";
+"catalog.item.rectangle.summary" = "キーボードショートカットでウインドウを配置";
+"catalog.item.stats.summary" = "メニューバーのシステムモニタ";
+"catalog.item.iina.summary" = "macOS 向けのモダンなメディアプレーヤー";
+"catalog.item.git.summary" = "分散型バージョン管理";
+"catalog.item.node.summary" = "ツールやサーバ向けの JavaScript ランタイム";
+"catalog.item.gh.summary" = "コマンドラインから使う GitHub";
+"catalog.item.jq.summary" = "JSON の抽出、フィルタ、整形";
+"catalog.item.vscode.summary" = "Microsoft の拡張可能なコードエディタ";
+"catalog.item.figma.summary" = "共同作業できるインターフェイスデザイン";
+"catalog.item.inkscape.summary" = "プロ向けのベクターグラフィックエディタ";
+"catalog.item.blender.summary" = "オープンソースの 3D 制作スイート";
+"catalog.item.imageoptim.summary" = "見た目を損なわずに画像を軽量化";
+"catalog.item.uv.summary" = "高速な Python パッケージ／プロジェクト管理";
+"catalog.item.jupyterlab.summary" = "コード、データ、文章のためのノートブック";
+"catalog.item.duckdb.summary" = "分析向けのインプロセス SQL データベース";
+"catalog.item.ffmpeg.summary" = "オーディオとビデオの録画、変換、配信";
+"catalog.item.audacity.summary" = "マルチトラックのオーディオ編集と録音";
+"catalog.item.obs.summary" = "配信と画面収録のスタジオ";
+"catalog.item.nmap.summary" = "ネットワーク探索とセキュリティ監査";
+"catalog.item.lulu.summary" = "オープンソースの送信ファイアウォール";
+"catalog.item.skhd.summary" = "macOS 用のシンプルなホットキーデーモン";
+
+/* Setups and starter kits */
+"setups.subtitle" = "ツール一式をまとめてインストールします。";
+"setups.action.importBrewfile" = "Brewfile を読み込む…";
+"setups.action.installMissing.one" = "未インストールの %d 件をインストール";
+"setups.action.installMissing.other" = "未インストールの %d 件をインストール";
+"setups.action.allInstalled" = "すべてインストール済み";
+"setups.kit.count.tools.one" = "%d 個のツール";
+"setups.kit.count.tools.other" = "%d 個のツール";
+"setups.kit.count.apps.one" = "%d 個のアプリ";
+"setups.kit.count.apps.other" = "%d 個のアプリ";
+"setups.kit.webDeveloper.title" = "Web 開発者";
+"setups.kit.webDeveloper.blurb" = "バージョン管理、Node.js、コンテナ、モダンなエディタ。";
+"setups.kit.designer.title" = "デザイナー";
+"setups.kit.designer.blurb" = "インターフェイスデザイン、ベクターイラスト、3D、画像の最適化。";
+"setups.kit.dataAndAI.title" = "データと AI";
+"setups.kit.dataAndAI.blurb" = "Python 環境、ノートブック、高速なローカル分析。";
+"setups.kit.creator.title" = "オーディオとビデオ";
+"setups.kit.creator.blurb" = "録音、編集、変換、配信。";
+"setups.kit.itAdmin.title" = "IT とセキュリティ";
+"setups.kit.itAdmin.blurb" = "ネットワークスキャン、送信ファイアウォール、システム監視。";
+"setups.kit.everydayMac.title" = "毎日の Mac";
+"setups.kit.everydayMac.blurb" = "どの Mac も使いやすくなる小さなユーティリティ。";
+
+/* Specialties */
+"specialty.development.title" = "ソフトウェア開発";
+"specialty.development.blurb" = "言語バージョン、ソースからのビルド、開発者向けキット";
+"specialty.creative.title" = "デザインとクリエイティブ";
+"specialty.creative.blurb" = "フォント、カラーツール、クリエイティブスイート、プラグイン";
+"specialty.data.title" = "データと研究";
+"specialty.data.blurb" = "Python と R の環境、ノートブック、分析ツール";
+"specialty.media.title" = "オーディオとビデオ";
+"specialty.media.blurb" = "コーデック、オーディオプラグイン、ドライバ、キャプチャツール";
+"specialty.administration.title" = "IT とセキュリティ";
+"specialty.administration.blurb" = "管理ツール、スキャナ、署名、デバイスポリシー";
+
+/* Installed */
+"installed.subtitle" = "この Mac 上の Homebrew パッケージと GitHub からのインストール";
+"installed.action.exportBrewfile" = "Brewfile を書き出す…";
+"installed.action.rescan" = "再スキャン";
+"installed.action.details" = "詳細";
+"installed.action.showInFinder" = "Finder に表示";
+"installed.filter.label" = "表示";
+"installed.filter.all" = "すべて";
+"installed.filter.apps" = "アプリ";
+"installed.filter.commandLine" = "コマンドライン";
+"installed.filter.prompt" = "絞り込み";
+"installed.hideDependencies" = "依存関係を隠す";
+"installed.column.name" = "名前";
+"installed.column.version" = "バージョン";
+"installed.column.source" = "入手先";
+"installed.column.status" = "状態";
+"installed.status.upToDate" = "最新";
+"installed.status.update" = "更新あり";
+"installed.status.tracked" = "記録済み";
+"installed.detail.location" = "場所";
+"installed.detail.source" = "インストール元";
+"installed.detail.type" = "種類";
+"installed.detail.available" = "利用可能";
+"installed.detail.about" = "概要";
+"installed.empty.title" = "まだ何もインストールされていません";
+"installed.empty.body" = "「発見」からインストールすると、ここに表示されます。";
+"installed.noMatches.title" = "一致する項目はありません";
+"installed.noMatches.body" = "この条件に一致するインストール済み項目はありません。";
+"installed.uninstall.confirm.title_format" = "%@ を削除しますか？";
+"installed.uninstall.confirm.body" = "Homebrew がこの Mac から削除します。いつでも再インストールできます。";
+
+/* Updates */
+"updates.subtitle.none" = "すべて最新です";
+"updates.subtitle.ready.one" = "%d 件のアップデートを適用できます";
+"updates.subtitle.ready.other" = "%d 件のアップデートを適用できます";
+"updates.subtitle.major.one" = "%d 件は先に確認が必要です";
+"updates.subtitle.major.other" = "%d 件は先に確認が必要です";
+"updates.action.checkNow" = "今すぐ確認";
+"updates.action.updateSelected.one" = "%d 件を更新";
+"updates.action.updateSelected.other" = "%d 件を更新";
+"updates.majorBanner.title" = "メジャーアップデートはチェックを外しています。";
+"updates.majorBanner.body" = "ツールの動作が変わる可能性があるため、更新前に確認してください。";
+"updates.empty.title" = "すべて最新です";
+"updates.empty.body" = "現在アップデートが必要な Homebrew パッケージはありません。";
+"updates.select_format" = "%@ を更新";
+"updates.change.major" = "メジャー";
+"updates.change.minor" = "マイナー";
+"updates.change.patch" = "パッチ";
+"updates.change.unknown" = "更新";
+
+/* Package detail */
+"detail.waysToGet.one" = "入手方法 %d 種類";
+"detail.waysToGet.other" = "入手方法 %d 種類";
+"detail.sources.title" = "入手先";
+"detail.version.title" = "バージョン";
+"detail.version.latest" = "最新";
+"detail.version.latest_format" = "%@（最新）";
+"detail.version.keepCurrent" = "現在のバージョンも残す";
+"detail.safety.title" = "安全性チェック";
+"detail.about.title" = "概要";
+"detail.about.empty" = "README はまだダウンロードされていません。";
+"detail.project.title" = "GitHub";
+"detail.project.stars" = "スター";
+"detail.project.language" = "言語";
+"detail.project.branch" = "デフォルトブランチ";
+"detail.project.synced" = "同期";
+"detail.project.refresh" = "GitHub から更新";
+"detail.project.viewOnGitHub" = "GitHub で表示";
+"detail.action.installWithHomebrew" = "Homebrew でインストール";
+"detail.action.openWebsite" = "Web サイトを開く";
+"detail.action.download" = "ダウンロード";
+"detail.action.viewRelease" = "リリースを表示";
+"detail.action.viewBuildInstructions" = "ビルド手順を表示";
+
+/* Install sources */
+"source.homebrewCask.title" = "Homebrew Cask";
+"source.homebrewCask.note" = "コミュニティのレシピ。Yatagarasu から更新できます";
+"source.homebrewFormula.title" = "Homebrew";
+"source.homebrewFormula.note" = "Homebrew が管理。Yatagarasu から更新できます";
+"source.website.title" = "公式 Web サイト";
+"source.website.note_format" = "%@ のインストーラ";
+"source.githubRelease.title" = "GitHub リリース";
+"source.githubRelease.note" = "プロジェクトが公開しているインストーラ";
+"source.githubRelease.unavailable" = "最近のリリースに macOS 用インストーラがありません";
+"source.sourceBuild.title" = "ソースからビルド";
+"source.sourceBuild.note" = "公開リポジトリからこの Mac でコンパイル";
+"source.chip.checksumVerified" = "チェックサム確認済み";
+"source.chip.opensBrowser" = "ブラウザで開く";
+"source.chip.unverified" = "未検証";
+"source.chip.unavailable" = "利用不可";
+"source.chip.advanced" = "上級者向け";
+
+/* Safety check */
+"safety.checksum.title" = "チェックサム確認済み";
+"safety.checksum.body" = "Homebrew はインストール前にダウンロードをレシピと照合します。";
+"safety.bottled.title" = "Mac 用にビルド済み";
+"safety.bottled.body" = "お使いの macOS 用のビルド済みパッケージがあれば、それを使います。";
+"safety.vendorDownload.title" = "開発元からダウンロード";
+"safety.vendorDownload.body" = "レシピは開発元自身のファイルを参照しています。";
+"safety.easyRemoval.title" = "簡単に削除可能";
+"safety.easyRemoval.body" = "「インストール済み」からいつでも削除できます。";
+"safety.fromDeveloper.title" = "開発元から入手";
+"safety.fromDeveloper.body" = "公式サイトからインストーラをダウンロードします。";
+"safety.gatekeeper.title" = "macOS がチェック";
+"safety.gatekeeper.body" = "初回起動時に Gatekeeper がアプリを検証します。";
+"safety.manualUpdates.title" = "Yatagarasu の外で更新";
+"safety.manualUpdates.body" = "アプリ自身が更新するか、手動で更新します。";
+"safety.fromProject.title" = "プロジェクトが公開";
+"safety.fromProject.body" = "ファイルはプロジェクト自身の GitHub リリースから取得します。";
+"safety.notVerified.title" = "Yatagarasu では未検証";
+"safety.notVerified.body" = "初回起動時に macOS が確認を求める場合があります。";
+"safety.readableCode.title" = "コードを確認できる";
+"safety.readableCode.body" = "選んだバージョンの公開リポジトリからビルドします。";
+"safety.needsTools.title" = "開発ツールが必要";
+"safety.needsTools.body" = "ビルドには通常 Xcode のコマンドラインツールが必要です。";
+"safety.takesTime.title" = "時間がかかります";
+"safety.takesTime.body" = "GitHub にあるプロジェクトのビルド手順に従ってください。";
+
+/* Packages */
+"packages.unavailable.title" = "Homebrew が必要です。";
+"packages.unavailable.body" = "パッケージのインストール、更新、削除には Homebrew をインストールしてください。";
+"packages.error.title" = "問題が発生しました。";
+"packages.loading" = "Homebrew パッケージを読み込み中…";
+"packages.status.installed" = "インストール済み";
+"packages.status.notInstalled" = "未インストール";
+"packages.action.install" = "インストール";
+"packages.action.update" = "更新";
+"packages.action.uninstall" = "削除";
+"packages.kind.formula" = "Formula";
+"packages.kind.cask" = "Cask";
+"packages.operation.install" = "インストール";
+"packages.operation.update" = "更新";
+"packages.operation.uninstall" = "削除";
+"packages.progress.stage.queued" = "待機中";
+"packages.progress.stage.resolving" = "依存関係を解決中";
+"packages.progress.stage.downloading" = "ダウンロード中";
+"packages.progress.stage.installing" = "インストール中";
+"packages.progress.stage.updating" = "更新中";
+"packages.progress.stage.removing" = "削除中";
+"packages.progress.stage.cleaningUp" = "クリーンアップ中";
+"packages.progress.stage.finishing" = "仕上げ中";
+"packages.progress.stage.completed" = "完了";
+"packages.progress.stage.failed" = "失敗";
+
+/* GitHub releases (model-level labels) */
+"openSource.installSource.homebrew" = "Homebrew";
+"openSource.installSource.githubRelease" = "GitHub リリース";
+"openSource.installSource.sourceBuild" = "ソースからビルド";
+"openSource.release.arch.appleSilicon" = "Apple シリコン";
+"openSource.release.arch.intel" = "Intel";
+"openSource.release.arch.universal" = "ユニバーサル";
+"openSource.release.arch.generic" = "macOS";
+"openSource.release.action.downloadDmg" = "DMG をダウンロード";
+"openSource.release.action.downloadPkg" = "PKG をダウンロード";
+"openSource.release.action.downloadZip" = "ZIP をダウンロード";
+
+/* Settings */
+"settings.tab.general" = "一般";
+"settings.tab.specialties" = "専門分野";
+"settings.tab.sources" = "入手先";
+"settings.tab.updates" = "アップデート";
+"settings.language.label" = "言語";
+"settings.language.footer" = "Mac の言語設定とは別に、Yatagarasu の表示言語を変更します。";
+"settings.language.option.en" = "英語";
+"settings.language.option.zhHans" = "簡体字中国語";
+"settings.language.option.zhHant" = "繁体字中国語";
+"settings.language.option.ja" = "日本語";
+"settings.specialties.intro" = "仕事に合うものをオンにしてください。専門分野によって Yatagarasu が最初に表示する内容が変わります。すべての項目は検索から引き続き利用できます。";
+"settings.specialties.effects.title" = "変わること";
+"settings.specialties.effects.none" = "追加の専門分野はオフです。標準の「発見」「インストール済み」「アップデート」画面が表示されます。";
+"settings.specialties.effects.kits" = "先に表示するスターターキット";
+"settings.sources.homebrew.title" = "Homebrew";
+"settings.sources.status" = "状態";
+"settings.sources.location" = "場所";
+"settings.homebrew.checking" = "確認中…";
+"settings.homebrew.detected" = "検出済み";
+"settings.homebrew.not_configured" = "この Mac では見つかりません";
+"settings.homebrew.install_hint" = "brew.sh から Homebrew をインストールするか、brew が /opt/homebrew/bin または /usr/local/bin にあることを確認してください。";
+"settings.homebrew.recheck" = "再確認";
+"settings.parser.validate" = "JSON パーサーを検証";
+"settings.parser.validating" = "検証中…";
+"settings.parser.not_available" = "Homebrew は現在利用できません。";
+"settings.parser.success_format" = "%d 個の formulae と %d 個の cask を解析しました。サンプル: %@";
+"settings.parser.failed_format" = "パーサー検証に失敗しました: %@";
+"settings.sources.github.title" = "GitHub";
+"settings.sources.github.access" = "アクセス";
+"settings.sources.github.public" = "公開 API（サインイン不要）";
+"settings.sources.github.cached" = "キャッシュ済みプロジェクト";
+"settings.sources.github.signIn" = "GitHub にサインイン…";
+"settings.updates.selectMajor" = "メジャーアップデートも自動で選択";
+"settings.updates.selectMajor.footer" = "オフの場合、メジャーアップデートは確認できるようにチェックなしで表示されます。";
+"settings.updates.background" = "バックグラウンドでアップデートを確認";
+"settings.updates.notify" = "アップデートがあるときに通知";
