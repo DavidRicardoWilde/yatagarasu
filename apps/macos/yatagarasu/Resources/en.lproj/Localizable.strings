@@ -1,0 +1,310 @@
+/* Common */
+"common.comingSoon" = "Coming in a future update";
+"common.clearSearch" = "Clear search";
+"common.unknown" = "Unknown";
+"common.expanded" = "Expanded";
+"common.collapsed" = "Collapsed";
+
+/* Menu commands */
+"command.search" = "Search";
+"command.menu.packages" = "Packages";
+"command.rescan" = "Rescan Installed Software";
+
+/* Sidebar */
+"sidebar.discover.title" = "Discover";
+"sidebar.installed.title" = "Installed";
+"sidebar.updates.title" = "Updates";
+"sidebar.setups.title" = "Setups";
+
+/* Activity */
+"activity.title" = "Activity";
+"activity.idle" = "All done";
+"activity.inQueue.one" = "%d in queue";
+"activity.inQueue.other" = "%d in queue";
+"activity.waiting.one" = "%d more waiting";
+"activity.waiting.other" = "%d more waiting";
+"activity.clear" = "Clear Finished";
+"activity.empty" = "Nothing is installing right now.";
+"activity.card.hint" = "Shows the command output for recent installs, updates and removals.";
+"activity.state.queued" = "Queued";
+"activity.state.done" = "Done";
+"activity.state.failed" = "Failed";
+
+/* Discover */
+"discover.search.prompt" = "Search apps, tools, repositories";
+"discover.search.resultCount.one" = "%d result";
+"discover.search.resultCount.other" = "%d results";
+"discover.search.empty.title_format" = "No results for “%@”";
+"discover.search.empty.body" = "Try a different name. Searching all of Homebrew is coming in a future update.";
+"discover.hero.eyebrow" = "New Mac?";
+"discover.hero.title" = "Set up everything in one go.";
+"discover.hero.body" = "Pick a starter kit and Yatagarasu queues every install for you, one after another.";
+"discover.hero.chooseKit" = "Choose a starter kit…";
+"discover.section.starterKits" = "Starter kits";
+"discover.section.popular" = "Popular this week";
+"discover.section.openSource" = "Open source on GitHub";
+"discover.action.seeAllKits" = "See all";
+"discover.action.get" = "Get";
+
+/* Catalog */
+"catalog.sourceCount.one" = "%d source";
+"catalog.sourceCount.other" = "%d sources";
+"catalog.item.ghostty.summary" = "Fast, native terminal emulator";
+"catalog.item.orbstack.summary" = "Containers and Linux machines, tuned for Apple silicon";
+"catalog.item.raycast.summary" = "Launcher and quick actions";
+"catalog.item.wezterm.summary" = "GPU-accelerated terminal with built-in multiplexing";
+"catalog.item.zed.summary" = "High-performance, collaborative code editor";
+"catalog.item.rectangle.summary" = "Snap windows into place with keyboard shortcuts";
+"catalog.item.stats.summary" = "System monitor in your menu bar";
+"catalog.item.iina.summary" = "Modern media player for macOS";
+"catalog.item.git.summary" = "Distributed version control";
+"catalog.item.node.summary" = "JavaScript runtime for tools and servers";
+"catalog.item.gh.summary" = "GitHub on the command line";
+"catalog.item.jq.summary" = "Slice, filter and reshape JSON";
+"catalog.item.vscode.summary" = "Extensible code editor from Microsoft";
+"catalog.item.figma.summary" = "Collaborative interface design";
+"catalog.item.inkscape.summary" = "Professional vector graphics editor";
+"catalog.item.blender.summary" = "Open-source 3D creation suite";
+"catalog.item.imageoptim.summary" = "Shrink images without visible quality loss";
+"catalog.item.uv.summary" = "Fast Python package and project manager";
+"catalog.item.jupyterlab.summary" = "Notebooks for code, data and writing";
+"catalog.item.duckdb.summary" = "In-process SQL database for analytics";
+"catalog.item.ffmpeg.summary" = "Record, convert and stream audio and video";
+"catalog.item.audacity.summary" = "Multi-track audio editor and recorder";
+"catalog.item.obs.summary" = "Streaming and screen recording studio";
+"catalog.item.nmap.summary" = "Network discovery and security auditing";
+"catalog.item.lulu.summary" = "Open-source outbound firewall";
+"catalog.item.skhd.summary" = "Simple hotkey daemon for macOS";
+
+/* Setups and starter kits */
+"setups.subtitle" = "Install a whole toolset in one go.";
+"setups.action.importBrewfile" = "Import Brewfile…";
+"setups.action.installMissing.one" = "Install %d missing";
+"setups.action.installMissing.other" = "Install %d missing";
+"setups.action.allInstalled" = "All installed";
+"setups.kit.count.tools.one" = "%d tool";
+"setups.kit.count.tools.other" = "%d tools";
+"setups.kit.count.apps.one" = "%d app";
+"setups.kit.count.apps.other" = "%d apps";
+"setups.kit.webDeveloper.title" = "Web developer";
+"setups.kit.webDeveloper.blurb" = "Version control, Node.js, containers and a modern editor.";
+"setups.kit.designer.title" = "Designer";
+"setups.kit.designer.blurb" = "Interface design, vector illustration, 3D and image optimization.";
+"setups.kit.dataAndAI.title" = "Data and AI";
+"setups.kit.dataAndAI.blurb" = "Python environments, notebooks and fast local analytics.";
+"setups.kit.creator.title" = "Audio and video";
+"setups.kit.creator.blurb" = "Record, edit, convert and stream.";
+"setups.kit.itAdmin.title" = "IT and security";
+"setups.kit.itAdmin.blurb" = "Network scanning, an outbound firewall and system monitoring.";
+"setups.kit.everydayMac.title" = "Everyday Mac";
+"setups.kit.everydayMac.blurb" = "Small utilities that make any Mac nicer to use.";
+
+/* Specialties */
+"specialty.development.title" = "Software development";
+"specialty.development.blurb" = "Language versions, build from source, developer kits";
+"specialty.creative.title" = "Design and creative";
+"specialty.creative.blurb" = "Fonts, color tools, creative suites and plugins";
+"specialty.data.title" = "Data and research";
+"specialty.data.blurb" = "Python and R environments, notebooks, analysis tools";
+"specialty.media.title" = "Audio and video";
+"specialty.media.blurb" = "Codecs, audio plugins, drivers and capture tools";
+"specialty.administration.title" = "IT and security";
+"specialty.administration.blurb" = "Admin tools, scanners, signatures and device policies";
+
+/* Installed */
+"installed.subtitle" = "Homebrew packages and GitHub installs on this Mac";
+"installed.action.exportBrewfile" = "Export Brewfile…";
+"installed.action.rescan" = "Rescan";
+"installed.action.details" = "Details";
+"installed.action.showInFinder" = "Show in Finder";
+"installed.filter.label" = "Show";
+"installed.filter.all" = "All";
+"installed.filter.apps" = "Apps";
+"installed.filter.commandLine" = "Command-line";
+"installed.filter.prompt" = "Filter";
+"installed.hideDependencies" = "Hide dependencies";
+"installed.column.name" = "Name";
+"installed.column.version" = "Version";
+"installed.column.source" = "Source";
+"installed.column.status" = "Status";
+"installed.status.upToDate" = "Up to date";
+"installed.status.update" = "Update";
+"installed.status.tracked" = "Tracked";
+"installed.detail.location" = "Location";
+"installed.detail.source" = "Installed from";
+"installed.detail.type" = "Type";
+"installed.detail.available" = "Available";
+"installed.detail.about" = "About";
+"installed.empty.title" = "Nothing installed yet";
+"installed.empty.body" = "Install a starter kit from Setups, or packages with Homebrew, and they'll show up here.";
+"installed.noMatches.title" = "No matches";
+"installed.noMatches.body" = "Nothing installed matches this filter.";
+"installed.uninstall.confirm.title_format" = "Uninstall %@?";
+"installed.uninstall.confirm.body" = "Homebrew will remove it from this Mac. You can install it again at any time.";
+
+/* Updates */
+"updates.subtitle.none" = "Everything is up to date";
+"updates.subtitle.ready.one" = "%d update ready";
+"updates.subtitle.ready.other" = "%d updates ready";
+"updates.subtitle.major.one" = "%d needs a look first";
+"updates.subtitle.major.other" = "%d need a look first";
+"updates.action.checkNow" = "Check Now";
+"updates.action.updateSelected.one" = "Update %d item";
+"updates.action.updateSelected.other" = "Update %d items";
+"updates.majorBanner.title" = "Major updates are left unchecked.";
+"updates.majorBanner.body" = "They can change how a tool behaves, so review them before updating.";
+"updates.empty.title" = "Everything is up to date";
+"updates.empty.body" = "No Homebrew packages need an update right now.";
+"updates.select_format" = "Update %@";
+"updates.change.major" = "Major";
+"updates.change.minor" = "Minor";
+"updates.change.patch" = "Patch";
+"updates.change.unknown" = "Update";
+
+/* Package detail */
+"detail.waysToGet.one" = "%d place to get it";
+"detail.waysToGet.other" = "%d places to get it";
+"detail.sources.title" = "Get it from";
+"detail.version.title" = "Version";
+"detail.version.latest" = "Latest";
+"detail.version.latest_format" = "%@ (latest)";
+"detail.version.keepCurrent" = "Keep my current version too";
+"detail.safety.title" = "Safety check";
+"detail.about.title" = "About";
+"detail.about.empty" = "The README hasn't been downloaded yet.";
+"detail.project.title" = "On GitHub";
+"detail.project.stars" = "Stars";
+"detail.project.language" = "Language";
+"detail.project.branch" = "Default branch";
+"detail.project.synced" = "Synced";
+"detail.project.refresh" = "Refresh from GitHub";
+"detail.project.viewOnGitHub" = "View on GitHub";
+"detail.action.installWithHomebrew" = "Install with Homebrew";
+"detail.action.openWebsite" = "Open website";
+"detail.action.download" = "Download";
+"detail.action.viewRelease" = "View release";
+"detail.action.viewBuildInstructions" = "View build instructions";
+
+/* Install sources */
+"source.homebrewCask.title" = "Homebrew Cask";
+"source.homebrewCask.note" = "Community recipe, updates through Yatagarasu";
+"source.homebrewFormula.title" = "Homebrew";
+"source.homebrewFormula.note" = "Maintained by Homebrew, updates through Yatagarasu";
+"source.website.title" = "Official website";
+"source.website.note_format" = "Installer from %@";
+"source.githubRelease.title" = "GitHub releases";
+"source.githubRelease.note" = "Installer published by the project";
+"source.githubRelease.unavailable" = "No macOS installer in recent releases";
+"source.sourceBuild.title" = "Build from source";
+"source.sourceBuild.note" = "Compile it on this Mac from the public repository";
+"source.chip.checksumVerified" = "Checksum verified";
+"source.chip.opensBrowser" = "Opens in browser";
+"source.chip.unverified" = "Not verified";
+"source.chip.unavailable" = "Unavailable";
+"source.chip.advanced" = "Advanced";
+
+/* Safety check */
+"safety.checksum.title" = "Checksum verified";
+"safety.checksum.body" = "Homebrew checks the download against its recipe before installing.";
+"safety.bottled.title" = "Pre-built for your Mac";
+"safety.bottled.body" = "Homebrew installs a ready-made build when one exists for your macOS.";
+"safety.vendorDownload.title" = "Downloads from the developer";
+"safety.vendorDownload.body" = "The recipe points to the developer's own file.";
+"safety.easyRemoval.title" = "Easy to remove";
+"safety.easyRemoval.body" = "Uninstall it from Installed at any time.";
+"safety.fromDeveloper.title" = "From the developer";
+"safety.fromDeveloper.body" = "You download the installer from the official site.";
+"safety.gatekeeper.title" = "Checked by macOS";
+"safety.gatekeeper.body" = "Gatekeeper verifies the app the first time you open it.";
+"safety.manualUpdates.title" = "Updates outside Yatagarasu";
+"safety.manualUpdates.body" = "The app updates itself, or you update it by hand.";
+"safety.fromProject.title" = "Published by the project";
+"safety.fromProject.body" = "The file comes from the project's own GitHub releases.";
+"safety.notVerified.title" = "Not verified by Yatagarasu";
+"safety.notVerified.body" = "macOS may ask you to confirm the first launch.";
+"safety.readableCode.title" = "You can read the code";
+"safety.readableCode.body" = "You build from the public repository at the version you choose.";
+"safety.needsTools.title" = "Needs developer tools";
+"safety.needsTools.body" = "Building usually requires Xcode's command-line tools.";
+"safety.takesTime.title" = "Takes time";
+"safety.takesTime.body" = "Follow the project's build instructions on GitHub.";
+
+/* Packages */
+"packages.unavailable.title" = "Homebrew is required.";
+"packages.unavailable.body" = "Install Homebrew to install, update and remove packages.";
+"packages.error.title" = "Something went wrong.";
+"packages.loading" = "Loading Homebrew packages…";
+"packages.status.installed" = "Installed";
+"packages.status.notInstalled" = "Not installed";
+"packages.action.install" = "Install";
+"packages.action.update" = "Update";
+"packages.action.uninstall" = "Uninstall";
+"packages.kind.formula" = "Formula";
+"packages.kind.cask" = "Cask";
+"packages.operation.install" = "Install";
+"packages.operation.update" = "Update";
+"packages.operation.uninstall" = "Uninstall";
+"packages.progress.stage.queued" = "Queued";
+"packages.progress.stage.resolving" = "Resolving dependencies";
+"packages.progress.stage.downloading" = "Downloading";
+"packages.progress.stage.installing" = "Installing";
+"packages.progress.stage.updating" = "Updating";
+"packages.progress.stage.removing" = "Removing";
+"packages.progress.stage.cleaningUp" = "Cleaning up";
+"packages.progress.stage.finishing" = "Finishing";
+"packages.progress.stage.completed" = "Completed";
+"packages.progress.stage.failed" = "Failed";
+
+/* GitHub releases (model-level labels) */
+"openSource.installSource.homebrew" = "Homebrew";
+"openSource.installSource.githubRelease" = "GitHub release";
+"openSource.installSource.sourceBuild" = "Built from source";
+"openSource.release.arch.appleSilicon" = "Apple silicon";
+"openSource.release.arch.intel" = "Intel";
+"openSource.release.arch.universal" = "Universal";
+"openSource.release.arch.generic" = "macOS";
+"openSource.release.action.downloadDmg" = "Download DMG";
+"openSource.release.action.downloadPkg" = "Download PKG";
+"openSource.release.action.downloadZip" = "Download ZIP";
+
+/* Settings */
+"settings.tab.general" = "General";
+"settings.tab.specialties" = "Specialties";
+"settings.tab.sources" = "Sources";
+"settings.tab.updates" = "Updates";
+"settings.language.label" = "Language";
+"settings.language.footer" = "Changes the language Yatagarasu uses, independent of your Mac's language.";
+"settings.language.option.en" = "English";
+"settings.language.option.zhHans" = "Simplified Chinese";
+"settings.language.option.zhHant" = "Traditional Chinese";
+"settings.language.option.ja" = "Japanese";
+"settings.app_icon.label" = "App Icon";
+"settings.app_icon.option.classic" = "Classic";
+"settings.app_icon.option.pixel" = "Pixel";
+"settings.app_icon.footer" = "Changes the icon in the Dock while Yatagarasu is open. Finder keeps showing the classic icon.";
+"settings.specialties.intro" = "Turn on what fits your work. Specialties change what Yatagarasu shows first. Everything stays available through search.";
+"settings.specialties.effects.title" = "What changes for you";
+"settings.specialties.effects.none" = "Nothing extra is on. Starter kits appear in their standard order.";
+"settings.specialties.effects.kits" = "Starter kits shown first";
+"settings.sources.homebrew.title" = "Homebrew";
+"settings.sources.status" = "Status";
+"settings.sources.location" = "Location";
+"settings.homebrew.checking" = "Checking…";
+"settings.homebrew.detected" = "Detected";
+"settings.homebrew.not_configured" = "Not found on this Mac";
+"settings.homebrew.install_hint" = "Install Homebrew from brew.sh, or make sure brew is in /opt/homebrew/bin or /usr/local/bin.";
+"settings.homebrew.recheck" = "Check Again";
+"settings.parser.validate" = "Validate JSON Parser";
+"settings.parser.validating" = "Validating…";
+"settings.parser.not_available" = "Homebrew is not available.";
+"settings.parser.success_format" = "Parsed %d formulae and %d casks. Sample: %@";
+"settings.parser.failed_format" = "Parser validation failed: %@";
+"settings.sources.github.title" = "GitHub";
+"settings.sources.github.access" = "Access";
+"settings.sources.github.public" = "Public API, no sign-in";
+"settings.sources.github.cached" = "Cached projects";
+"settings.sources.github.signIn" = "Sign In to GitHub…";
+"settings.updates.selectMajor" = "Select major updates automatically";
+"settings.updates.selectMajor.footer" = "When off, major updates start unchecked in Updates so you can review them first.";
+"settings.updates.background" = "Check for updates in the background";
+"settings.updates.notify" = "Notify me when updates are available";

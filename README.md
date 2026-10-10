@@ -25,42 +25,53 @@ Yatagarasu is currently an actively developed MVP with a working core experience
 - Detects a local Homebrew installation automatically
 - Loads installed formulae and casks through `brew info --json=v2`
 - Supports install, upgrade, and uninstall flows from the UI
-- Tracks active operations with staged progress and a floating command console
+- Tracks active operations with staged progress; the sidebar Activity card opens live `brew` output
 - Filters installed formulae to hide dependency-only installs unless the user explicitly installed them
 
 ### Open-source discovery
 
-- Includes a dedicated **Open Source** section for curated GitHub projects
+- Curated GitHub projects open in the shared package detail page
 - Fetches repository metadata, README content, and recent releases from the GitHub API
 - Renders project READMEs in a native SwiftUI detail experience
 - Parses release assets and prefers installable macOS artifacts such as `.dmg`, `.pkg`, and `.zip`
 - Falls back to a clear “build from source” path when a repository does not publish a suitable binary release
 
-### Unified installed view
+### One app, many sources
 
-- Shows Homebrew-managed packages and tracked GitHub-origin records in one place
-- Preserves installation-source context, including GitHub Release and source-build entry points
-- Surfaces outdated packages and supports batch updates for Homebrew-managed items
+- Each package's detail page lists every place it can come from (Homebrew, official website, GitHub releases, build from source) with a safety check for the selected source
+- **Setups** installs whole starter kits in one go; **Specialties** in Settings decide which kits show first
+
+### Installed and Updates
+
+- **Installed** shows Homebrew-managed packages and tracked GitHub-origin records in one expandable table
+- **Updates** classifies each update as major, minor, or patch and leaves major updates unchecked by default
 
 ### macOS-native UX
 
-- `NavigationSplitView` layout with a glassmorphism-inspired interface
-- Material-backed cards, native typography, and SF Symbols
+- `NavigationSplitView` shell with a calm, light-first design ("Direction A") that adapts to dark mode
+- Design tokens and shared components live in `DesignSystem/`
 - Built-in localization support for English, Simplified Chinese, Traditional Chinese, and Japanese
-- Settings for language selection, Homebrew re-check, parser validation, and command console visibility
+- A standard Settings window (⌘,) with General, Specialties, Sources, and Updates tabs
 
 ## Current scope
 
 Implemented areas:
 
-- **Discover**
-- **Open Source**
 - **Installed**
+- **Updates**
+- **Setups**
+- **Package detail**
 - **Settings**
 
-Still evolving:
+Hidden for now:
 
-- **Categories** view content
+- **Discover** is built but switched off (`FeatureFlags.showsDiscover`). Its storefront content is hard-coded, so it can't list every version an app offers, link straight to vendor downloads, or show real app icons. It returns once app data comes from a maintained source, such as a backend or a JSON catalog the app refreshes periodically.
+
+Still evolving (shown in the UI as disabled "coming soon" controls; search the code for `pendingFeature()`):
+
+- Brewfile import and export
+- Keeping several versions side by side, background update checks, notifications
+- GitHub sign-in and searching all of Homebrew
 - **Developer / Dev-Space** workflows
 - More robust rendering for HTML-heavy READMEs
 - Broader automation around GitHub release installation
@@ -80,8 +91,9 @@ Yatagarasu is a native Swift application with a small, focused stack:
 ### Architecture at a glance
 
 - **UI layer**
-  - `ContentView` hosts the main shell and top-level navigation.
-  - SwiftUI feature views render discovery, installed packages, open-source details, and settings.
+  - `App/RootView` hosts the `NavigationSplitView` shell; `AppRouter` owns sidebar selection and the push stack.
+  - `AppModel` is the composition root and the single entry point views use for install / update / uninstall.
+  - `Features/` holds one folder per screen, built from the tokens and components in `DesignSystem/`.
 
 - **Workspace / state layer**
   - `PackageWorkspace` coordinates Homebrew-backed package state.
@@ -108,11 +120,13 @@ Yatagarasu is a **Turborepo monorepo** with platform-specific apps under `apps/`
 │   │   ├── package.json
 │   │   ├── yatagarasu.xcodeproj
 │   │   └── yatagarasu/
-│   │       ├── ContentView.swift
-│   │       ├── PackageWorkspace.swift
-│   │       ├── OpenSourceCatalogWorkspace.swift
-│   │       ├── Services/
-│   │       └── Models/
+│   │       ├── App/            # Entry point, AppModel, commands, root window
+│   │       ├── Navigation/     # Sidebar destinations and router
+│   │       ├── DesignSystem/   # Tokens (color, type, spacing) and shared components
+│   │       ├── Catalog/        # Curated items, starter kits, specialties
+│   │       ├── Features/       # Discover, Installed, Updates, Setups, PackageDetail, Settings, Sidebar
+│   │       ├── Core/           # Models, services, workspaces, Homebrew detection, localization
+│   │       └── Resources/      # Assets and Localizable.strings (en, ja, zh-Hans, zh-Hant)
 │   ├── linux/              # Linux app (placeholder, coming soon)
 │   └── windows/            # Windows app (placeholder, coming soon)
 ├── package.json            # Root workspace config
@@ -124,14 +138,15 @@ Yatagarasu is a **Turborepo monorepo** with platform-specific apps under `apps/`
 
 - **Turborepo** orchestrates builds across apps
 - Workspace packages are scoped as `@yatagarasu/<platform>`
-- Run `npm run build` from root to build all apps; `npm run build:macos` for just macOS
+- **pnpm** workspaces (`pnpm-workspace.yaml`); the pnpm version is pinned in `package.json`
+- Run `pnpm build` from root to build all apps; `pnpm build:macos` for just macOS
 
 ## Getting started
 
 ### Requirements
 
-- A recent version of Xcode with SwiftUI and SwiftData support
-- macOS development environment
+- macOS 26.2 or later and Xcode 26.2 or later
+- Node.js and [pnpm](https://pnpm.io) (`corepack enable` picks up the pinned version)
 - Homebrew installed locally if you want to use Homebrew package management features
 
 ### Build
@@ -140,13 +155,13 @@ From the repository root:
 
 ```bash
 # Install dependencies (first time only)
-npm install
+pnpm install
 
 # Build all apps
-npm run build
+pnpm build
 
 # Build only macOS
-npm run build:macos
+pnpm build:macos
 
 # Or build directly with xcodebuild
 cd apps/macos
@@ -154,6 +169,37 @@ xcodebuild -project yatagarasu.xcodeproj -scheme yatagarasu -configuration Debug
 ```
 
 You can also open `apps/macos/yatagarasu.xcodeproj` directly in Xcode and run the `yatagarasu` scheme.
+
+### Build a standalone app
+
+To get a `Yatagarasu.app` you can launch from the Applications folder like any other app:
+
+```bash
+# Build a Release, universal app and copy it into /Applications
+pnpm install:macos
+
+# Or only build it, plus a .zip and a drag-to-install .dmg, into apps/macos/dist/
+pnpm package:macos
+```
+
+Both run `apps/macos/scripts/package-app.sh`; see `--help` for options such as `--install-dir ~/Applications`, `--version`, and `--sign` for a Developer ID identity. By default the app is ad-hoc signed, which needs no Apple Developer account.
+
+## Download
+
+Every push to `master` builds the app with GitHub Actions (`.github/workflows/macos-app.yml`) and publishes it to this repository's **Packages** section as `ghcr.io/davidricardowilde/yatagarasu-macos`:
+
+- `edge`: the latest `master` build
+- `X.Y.Z` and `latest`: builds from version tags (`vX.Y.Z`), which are also attached to a GitHub Release for one-click downloads
+
+To download from Packages, use [ORAS](https://oras.land) (`brew install oras`):
+
+```bash
+oras pull ghcr.io/davidricardowilde/yatagarasu-macos:latest
+```
+
+This gives you `Yatagarasu-<version>-macOS.dmg`, the same app as a `.zip`, and `SHA256SUMS.txt`. Open the .dmg and drag Yatagarasu into Applications.
+
+The builds are not notarized by Apple yet. If macOS says the app can't be opened after a browser download, Control-click it in Applications and choose **Open**, or allow it under **System Settings › Privacy & Security**.
 
 ### Test status
 
@@ -163,7 +209,7 @@ The repository currently does not expose a fully configured automated test actio
 
 Yatagarasu already provides a solid core workflow, but it is still early in its lifecycle. A few areas are intentionally in progress:
 
-- Some sidebar destinations are placeholders rather than complete product areas.
+- Some controls from the design are placeholders until their backends exist (see `pendingFeature()`).
 - HTML-heavy GitHub READMEs are not yet rendered with a dedicated fallback path.
 - GitHub integration currently focuses on discovery, release inspection, and install-source tracking rather than end-to-end managed installation for every repository.
 - Homebrew-backed workflows naturally depend on a valid local Homebrew installation.
@@ -188,7 +234,7 @@ Contributions are welcome, especially around:
 - localization
 - test coverage and developer tooling
 
-If you open a pull request, please verify the project still builds with `xcodebuild` or `npm run build` before submitting.
+If you open a pull request, please verify the project still builds with `xcodebuild` or `pnpm build` before submitting.
 
 ## License
 

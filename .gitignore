@@ -92,13 +92,21 @@ playground.xcworkspace
 
 # Ignore entitlements if they contain secrets (adjust if you commit intentionally)
 *.entitlements
+# The macOS app's entitlements are referenced by the build settings and hold no secrets.
+!apps/macos/yatagarasu/yatagarasu.entitlements
 docs/
 
 # Turborepo
 .turbo/
 node_modules/
 
-# Package manager lockfiles (committed by convention for npm, ignored for others)
-pnpm-lock.yaml
+# Package manager lockfiles: pnpm-lock.yaml is committed; other package managers aren't used
+package-lock.json
 yarn.lock
 bun.lockb
+
+# Packaged app builds (apps/macos/scripts/package-app.sh)
+dist/
+
+# LLVM coverage output from running instrumented builds
+*.profraw

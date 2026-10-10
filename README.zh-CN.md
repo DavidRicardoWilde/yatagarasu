@@ -25,42 +25,53 @@ Yatagarasu 目前处于持续开发中的 MVP 阶段，但核心链路已经具�
 - 自动检测本机 Homebrew 安装位置
 - 通过 `brew info --json=v2` 读取已安装 formulae 与 casks
 - 在界面中触发安装、升级、卸载
-- 用浮动命令控制台展示实时输出与阶段性进度
+- 展示阶段性进度；点击侧边栏的“活动”卡片可查看 `brew` 实时输出
 - 已对 Installed 列表做显式安装过滤：**仅作为依赖安装的 formula 默认不展示；若用户曾手动安装过，则依然展示**
 
 ### GitHub 开源集成
 
-- 提供独立的 **Open Source** 页面，用于展示精选 GitHub 项目
+- 精选 GitHub 项目在统一的软件详情页中打开
 - 拉取仓库元数据、README 与 Releases
 - 在原生 SwiftUI 详情页中展示 README 内容
 - 解析适合 macOS 的 Release 资产，优先识别 `.dmg`、`.pkg`、`.zip`
 - 当仓库没有适合当前机器的二进制发布时，明确提示用户可从源码构建
 
-### Installed 统一视图
+### 一个应用，多个来源
 
-- 在同一个页面中展示 Homebrew 已安装包与 GitHub 来源记录
-- 保留安装来源语义，例如 GitHub Release 入口或 Source Build 入口
-- 支持识别可更新的 Homebrew 包，并提供批量更新入口
+- 每个软件的详情页列出所有获取来源（Homebrew、官方网站、GitHub 发行版、源码构建），并针对所选来源给出安全检查
+- **Setups** 可一次安装整套入门套件；设置中的 **专长** 决定优先展示哪些套件
+
+### Installed 与 Updates
+
+- **Installed** 在一个可展开的表格中展示 Homebrew 已安装包与 GitHub 来源记录
+- **Updates** 将每个更新标记为主要 / 次要 / 补丁版本，主要版本更新默认不勾选
 
 ### 原生 macOS 体验
 
-- 基于 `NavigationSplitView` 的主界面布局
-- 使用 `ultraThinMaterial`、卡片式分层和 SF Symbols 构建偏原生的视觉风格
+- 基于 `NavigationSplitView` 的主界面，采用安静、浅色优先的设计（Direction A），并适配深色模式
+- 设计令牌与通用组件集中在 `DesignSystem/`
 - 支持英文、简体中文、繁体中文、日文
-- 设置页提供语言切换、Homebrew 重新检测、解析校验、命令控制台开关等能力
+- 标准的设置窗口（⌘,），包含通用、专长、来源、更新四个标签页
 
 ## 当前范围
 
 已经具备实际功能的区域：
 
-- **Discover**
-- **Open Source**
 - **Installed**
+- **Updates**
+- **Setups**
+- **软件详情页**
 - **Settings**
 
-仍在完善中的区域：
+暂时隐藏：
 
-- **Categories** 的内容组织
+- **Discover** 已实现但暂时关闭（`FeatureFlags.showsDiscover`）。它的内容目前是写死在代码里的，无法列出应用的所有可用版本、提供官网直链下载，也无法显示真实的应用图标。等应用数据改由可维护的数据源提供（例如后端服务，或由应用定期刷新的 JSON 目录）后再开放。
+
+仍在完善中的区域（界面中以禁用的“即将提供”控件呈现，可在代码中搜索 `pendingFeature()`）：
+
+- Brewfile 导入与导出
+- 多版本并存、后台检查更新、通知
+- GitHub 登录与全量 Homebrew 搜索
 - **Developer / Dev-Space** 的实际能力
 - 对 HTML-heavy README 的更强兼容方案
 - GitHub Release 安装链路的进一步自动化
@@ -81,8 +92,9 @@ Yatagarasu 使用的是一套非常明确的原生技术栈：
 
 ### UI 层
 
-- `ContentView` 负责整体应用壳与主导航。
-- 主要功能页面使用 SwiftUI 组件化组织，包括 Discover、Installed、Open Source 与 Settings。
+- `App/RootView` 承载 `NavigationSplitView` 主界面；`AppRouter` 管理侧边栏选择与页面栈。
+- `AppModel` 是组合根，也是视图触发安装 / 更新 / 卸载的唯一入口。
+- `Features/` 按页面拆分目录，统一使用 `DesignSystem/` 中的令牌与组件。
 
 ### 状态与编排层
 
@@ -112,11 +124,13 @@ Yatagarasu 是一个基于 **Turborepo** 的 monorepo，各平台应用位于 `a
 │   │   ├── package.json
 │   │   ├── yatagarasu.xcodeproj
 │   │   └── yatagarasu/
-│   │       ├── ContentView.swift
-│   │       ├── PackageWorkspace.swift
-│   │       ├── OpenSourceCatalogWorkspace.swift
-│   │       ├── Services/
-│   │       └── Models/
+│   │       ├── App/            # 入口、AppModel、菜单命令、主窗口
+│   │       ├── Navigation/     # 侧边栏目的地与路由
+│   │       ├── DesignSystem/   # 设计令牌（颜色、字体、间距）与通用组件
+│   │       ├── Catalog/        # 精选条目、入门套件、专长
+│   │       ├── Features/       # Discover、Installed、Updates、Setups、PackageDetail、Settings、Sidebar
+│   │       ├── Core/           # 模型、服务、工作区、Homebrew 检测、本地化
+│   │       └── Resources/      # 资源与 Localizable.strings（en、ja、zh-Hans、zh-Hant）
 │   ├── linux/              # Linux 应用（占位，即将开始）
 │   └── windows/            # Windows 应用（占位，即将开始）
 ├── package.json            # 根工作区配置
@@ -128,14 +142,15 @@ Yatagarasu 是一个基于 **Turborepo** 的 monorepo，各平台应用位于 `a
 
 - **Turborepo** 编排跨应用构建
 - 工作区包以 `@yatagarasu/<platform>` 命名
-- 根目录执行 `npm run build` 构建全部应用；`npm run build:macos` 仅构建 macOS
+- 使用 **pnpm** 工作区（`pnpm-workspace.yaml`），pnpm 版本固定在 `package.json` 中
+- 根目录执行 `pnpm build` 构建全部应用；`pnpm build:macos` 仅构建 macOS
 
 ## 如何开始
 
 ### 环境要求
 
-- 一套较新的 Xcode 开发环境
-- macOS 开发机器
+- macOS 26.2 或更高版本，以及 Xcode 26.2 或更高版本
+- Node.js 与 [pnpm](https://pnpm.io)（执行 `corepack enable` 即可使用固定版本）
 - 如果你要使用 Homebrew 管理功能，需要本机已经安装 Homebrew
 
 ### 构建
@@ -144,13 +159,13 @@ Yatagarasu 是一个基于 **Turborepo** 的 monorepo，各平台应用位于 `a
 
 ```bash
 # 首次需要安装依赖
-npm install
+pnpm install
 
 # 构建全部应用
-npm run build
+pnpm build
 
 # 仅构建 macOS
-npm run build:macos
+pnpm build:macos
 
 # 或直接用 xcodebuild 构建
 cd apps/macos
@@ -158,6 +173,37 @@ xcodebuild -project yatagarasu.xcodeproj -scheme yatagarasu -configuration Debug
 ```
 
 也可以直接用 Xcode 打开 `apps/macos/yatagarasu.xcodeproj`，运行 `yatagarasu` scheme。
+
+### 构建独立应用
+
+如果想得到一个可以像普通应用一样从“应用程序”文件夹启动的 `Yatagarasu.app`：
+
+```bash
+# 构建 Release 通用版应用并复制到 /Applications
+pnpm install:macos
+
+# 或者只构建，并在 apps/macos/dist/ 中生成 .zip 和可拖拽安装的 .dmg
+pnpm package:macos
+```
+
+两者都会调用 `apps/macos/scripts/package-app.sh`，可用 `--help` 查看选项，例如 `--install-dir ~/Applications`、`--version`，以及用于 Developer ID 签名的 `--sign`。默认使用 ad-hoc 签名，无需 Apple 开发者账号。
+
+## 下载
+
+每次推送到 `master`，GitHub Actions（`.github/workflows/macos-app.yml`）都会构建应用，并发布到本仓库的 **Packages** 中，地址为 `ghcr.io/davidricardowilde/yatagarasu-macos`：
+
+- `edge`：最新的 `master` 构建
+- `X.Y.Z` 与 `latest`：版本标签（`vX.Y.Z`）的构建，同时会附加到 GitHub Release，方便直接点击下载
+
+从 Packages 下载需要使用 [ORAS](https://oras.land)（`brew install oras`）：
+
+```bash
+oras pull ghcr.io/davidricardowilde/yatagarasu-macos:latest
+```
+
+你会得到 `Yatagarasu-<version>-macOS.dmg`、同一应用的 `.zip` 以及 `SHA256SUMS.txt`。打开 .dmg，把 Yatagarasu 拖进“应用程序”即可。
+
+目前的构建尚未经过 Apple 公证。如果通过浏览器下载后 macOS 提示无法打开，请在“应用程序”中按住 Control 点按该应用并选择 **打开**，或在 **系统设置 › 隐私与安全性** 中允许。
 
 ### 测试状态
 
@@ -167,7 +213,7 @@ xcodebuild -project yatagarasu.xcodeproj -scheme yatagarasu -configuration Debug
 
 这个项目已经有了完整的核心方向，但仍然处于早期阶段，以下内容还在演进中：
 
-- 部分侧边栏入口目前仍是占位或过渡状态
+- 设计中的部分控件在后端就绪前仍为占位（见 `pendingFeature()`）
 - 对复杂 HTML README 的专门回退渲染方案尚未接入
 - GitHub 集成目前更偏向“发现、查看、记录来源”，而不是对所有项目都提供端到端的托管安装
 - Homebrew 相关能力依赖本机 Homebrew 可用
@@ -192,7 +238,7 @@ Yatagarasu 想做的，是在不牺牲原有能力的前提下，把这些工作
 - 本地化
 - 自动化测试与开发工具链
 
-如果你要提交 Pull Request，建议先用 `xcodebuild` 或 `npm run build` 确认项目能够正常构建。
+如果你要提交 Pull Request，建议先用 `xcodebuild` 或 `pnpm build` 确认项目能够正常构建。
 
 ## License
 
