@@ -278,6 +278,10 @@
 "settings.language.option.zhHans" = "簡體中文";
 "settings.language.option.zhHant" = "繁體中文";
 "settings.language.option.ja" = "日文";
+"settings.app_icon.label" = "App 圖像";
+"settings.app_icon.option.classic" = "經典";
+"settings.app_icon.option.pixel" = "像素";
+"settings.app_icon.footer" = "在 Yatagarasu 開啟時更改 Dock 中的圖像。Finder 中仍會顯示經典圖像。";
 "settings.specialties.intro" = "開啟適合你工作的專長。專長會改變 Yatagarasu 優先顯示的內容，所有項目仍可透過搜尋找到。";
 "settings.specialties.effects.title" = "對你的影響";
 "settings.specialties.effects.none" = "未開啟額外專長。你會看到標準的「探索」「已安裝」與「更新」頁面。";

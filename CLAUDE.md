@@ -56,14 +56,16 @@ Workspace packages are scoped as `@yatagarasu/<platform>`. Each app's `package.j
 Sources live under `apps/macos/yatagarasu/` (Xcode uses filesystem-synchronized groups, so new files and folders are picked up without editing the `.pbxproj`):
 
 ```
-App/           YatagarasuApp (scenes), AppModel (composition root), RootView, AppCommands, Persistence, PreviewSupport
+App/           YatagarasuApp (scenes), AppModel (composition root), RootView, AppCommands, AppIconStyle, Persistence, PreviewSupport
 Navigation/    SidebarItem, AppRouter (sidebar selection + push stack, AppRoute)
 DesignSystem/  Theme/ (Palette, Typography, Metrics tokens) and Components/ (buttons, chips, cards, banners, …)
 Catalog/       CatalogItem, StarterKit, Specialty, CuratedCatalog (shipped storefront content)
 Features/      Sidebar/, Discover/, Installed/, Updates/, Setups/, PackageDetail/, Settings/, Shared/
 Core/          Models/, Services/, Workspaces/, Homebrew/ (brew detection), Localization/ (L10n, AppLanguage)
-Resources/     Assets.xcassets, <lang>.lproj/Localizable.strings
+Resources/     Assets.xcassets, AppIcon.icon + PixelAppIcon.icon (Icon Composer), <lang>.lproj/Localizable.strings
 ```
+
+The app icons are generated, not hand-edited: `apps/macos/design/app-icon/tools/build.py` draws the Classic and Pixel crow and writes both `.icon` packages (see that folder's README). `PixelAppIcon` is an alternate icon (`ASSETCATALOG_COMPILER_ALTERNATE_APPICON_NAMES`); macOS has no alternate-icon API, so Settings › General only swaps the Dock icon at runtime via `AppIconStyle`.
 
 The app follows a UI → Workspace/state → Service → Persistence layering:
 

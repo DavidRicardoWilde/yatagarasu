@@ -278,6 +278,10 @@
 "settings.language.option.zhHans" = "Simplified Chinese";
 "settings.language.option.zhHant" = "Traditional Chinese";
 "settings.language.option.ja" = "Japanese";
+"settings.app_icon.label" = "App Icon";
+"settings.app_icon.option.classic" = "Classic";
+"settings.app_icon.option.pixel" = "Pixel";
+"settings.app_icon.footer" = "Changes the icon in the Dock while Yatagarasu is open. Finder keeps showing the classic icon.";
 "settings.specialties.intro" = "Turn on what fits your work. Specialties change what Yatagarasu shows first. Everything stays available through search.";
 "settings.specialties.effects.title" = "What changes for you";
 "settings.specialties.effects.none" = "Nothing extra is on. You see the standard Discover, Installed and Updates screens.";

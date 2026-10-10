@@ -47,10 +47,11 @@ final class AppModel {
 
     // MARK: Lifecycle
 
-    /// Runs once per launch: find Homebrew, then load installed packages.
+    /// Runs once per launch: restore the chosen Dock icon, find Homebrew, then load installed packages.
     func start() async {
         guard !hasStarted else { return }
         hasStarted = true
+        AppIconStyle.saved.apply()
         await refreshEnvironment()
         await homebrew.runDebugDiagnosticsIfRequested()
     }

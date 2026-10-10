@@ -278,6 +278,10 @@
 "settings.language.option.zhHans" = "简体中文";
 "settings.language.option.zhHant" = "繁體中文";
 "settings.language.option.ja" = "日语";
+"settings.app_icon.label" = "应用图标";
+"settings.app_icon.option.classic" = "经典";
+"settings.app_icon.option.pixel" = "像素";
+"settings.app_icon.footer" = "在 Yatagarasu 打开时更改程序坞中的图标。访达中仍显示经典图标。";
 "settings.specialties.intro" = "打开适合你工作的专长。专长会改变 Yatagarasu 优先展示的内容，所有项目仍可通过搜索找到。";
 "settings.specialties.effects.title" = "对你的影响";
 "settings.specialties.effects.none" = "未开启额外专长。你会看到标准的“发现”“已安装”和“更新”页面。";

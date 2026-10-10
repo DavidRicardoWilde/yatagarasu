@@ -278,6 +278,10 @@
 "settings.language.option.zhHans" = "簡体字中国語";
 "settings.language.option.zhHant" = "繁体字中国語";
 "settings.language.option.ja" = "日本語";
+"settings.app_icon.label" = "アプリアイコン";
+"settings.app_icon.option.classic" = "クラシック";
+"settings.app_icon.option.pixel" = "ピクセル";
+"settings.app_icon.footer" = "Yatagarasu の起動中、Dock のアイコンを変更します。Finder ではクラシックのアイコンのまま表示されます。";
 "settings.specialties.intro" = "仕事に合うものをオンにしてください。専門分野によって Yatagarasu が最初に表示する内容が変わります。すべての項目は検索から引き続き利用できます。";
 "settings.specialties.effects.title" = "変わること";
 "settings.specialties.effects.none" = "追加の専門分野はオフです。標準の「発見」「インストール済み」「アップデート」画面が表示されます。";
