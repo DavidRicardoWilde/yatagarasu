@@ -5,6 +5,8 @@
   "description": "Yatagarasu macOS app — native SwiftUI package manager frontend",
   "scripts": {
     "build": "xcodebuild -project yatagarasu.xcodeproj -scheme yatagarasu -configuration Debug -destination 'platform=macOS' build",
-    "clean": "xcodebuild -project yatagarasu.xcodeproj -scheme yatagarasu -configuration Debug -destination 'platform=macOS' clean"
+    "clean": "xcodebuild -project yatagarasu.xcodeproj -scheme yatagarasu -configuration Debug -destination 'platform=macOS' clean",
+    "package": "bash scripts/package-app.sh",
+    "install-app": "bash scripts/package-app.sh --install --no-dmg"
   }
 }
