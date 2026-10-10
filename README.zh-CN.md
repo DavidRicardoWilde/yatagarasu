@@ -30,7 +30,7 @@ Yatagarasu 目前处于持续开发中的 MVP 阶段，但核心链路已经具�
 
 ### GitHub 开源集成
 
-- 精选 GitHub 项目显示在 **Discover** 中，并在统一的软件详情页打开
+- 精选 GitHub 项目在统一的软件详情页中打开
 - 拉取仓库元数据、README 与 Releases
 - 在原生 SwiftUI 详情页中展示 README 内容
 - 解析适合 macOS 的 Release 资产，优先识别 `.dmg`、`.pkg`、`.zip`
@@ -57,12 +57,15 @@ Yatagarasu 目前处于持续开发中的 MVP 阶段，但核心链路已经具�
 
 已经具备实际功能的区域：
 
-- **Discover**
 - **Installed**
 - **Updates**
 - **Setups**
 - **软件详情页**
 - **Settings**
+
+暂时隐藏：
+
+- **Discover** 已实现但暂时关闭（`FeatureFlags.showsDiscover`）。它的内容目前是写死在代码里的，无法列出应用的所有可用版本、提供官网直链下载，也无法显示真实的应用图标。等应用数据改由可维护的数据源提供（例如后端服务，或由应用定期刷新的 JSON 目录）后再开放。
 
 仍在完善中的区域（界面中以禁用的“即将提供”控件呈现，可在代码中搜索 `pendingFeature()`）：
 
@@ -139,14 +142,15 @@ Yatagarasu 是一个基于 **Turborepo** 的 monorepo，各平台应用位于 `a
 
 - **Turborepo** 编排跨应用构建
 - 工作区包以 `@yatagarasu/<platform>` 命名
-- 根目录执行 `npm run build` 构建全部应用；`npm run build:macos` 仅构建 macOS
+- 使用 **pnpm** 工作区（`pnpm-workspace.yaml`），pnpm 版本固定在 `package.json` 中
+- 根目录执行 `pnpm build` 构建全部应用；`pnpm build:macos` 仅构建 macOS
 
 ## 如何开始
 
 ### 环境要求
 
-- 一套较新的 Xcode 开发环境
-- macOS 开发机器
+- macOS 26.2 或更高版本，以及 Xcode 26.2 或更高版本
+- Node.js 与 [pnpm](https://pnpm.io)（执行 `corepack enable` 即可使用固定版本）
 - 如果你要使用 Homebrew 管理功能，需要本机已经安装 Homebrew
 
 ### 构建
@@ -155,13 +159,13 @@ Yatagarasu 是一个基于 **Turborepo** 的 monorepo，各平台应用位于 `a
 
 ```bash
 # 首次需要安装依赖
-npm install
+pnpm install
 
 # 构建全部应用
-npm run build
+pnpm build
 
 # 仅构建 macOS
-npm run build:macos
+pnpm build:macos
 
 # 或直接用 xcodebuild 构建
 cd apps/macos
@@ -169,6 +173,37 @@ xcodebuild -project yatagarasu.xcodeproj -scheme yatagarasu -configuration Debug
 ```
 
 也可以直接用 Xcode 打开 `apps/macos/yatagarasu.xcodeproj`，运行 `yatagarasu` scheme。
+
+### 构建独立应用
+
+如果想得到一个可以像普通应用一样从“应用程序”文件夹启动的 `Yatagarasu.app`：
+
+```bash
+# 构建 Release 通用版应用并复制到 /Applications
+pnpm install:macos
+
+# 或者只构建，并在 apps/macos/dist/ 中生成 .zip 和可拖拽安装的 .dmg
+pnpm package:macos
+```
+
+两者都会调用 `apps/macos/scripts/package-app.sh`，可用 `--help` 查看选项，例如 `--install-dir ~/Applications`、`--version`，以及用于 Developer ID 签名的 `--sign`。默认使用 ad-hoc 签名，无需 Apple 开发者账号。
+
+## 下载
+
+每次推送到 `master`，GitHub Actions（`.github/workflows/macos-app.yml`）都会构建应用，并发布到本仓库的 **Packages** 中，地址为 `ghcr.io/davidricardowilde/yatagarasu-macos`：
+
+- `edge`：最新的 `master` 构建
+- `X.Y.Z` 与 `latest`：版本标签（`vX.Y.Z`）的构建，同时会附加到 GitHub Release，方便直接点击下载
+
+从 Packages 下载需要使用 [ORAS](https://oras.land)（`brew install oras`）：
+
+```bash
+oras pull ghcr.io/davidricardowilde/yatagarasu-macos:latest
+```
+
+你会得到 `Yatagarasu-<version>-macOS.dmg`、同一应用的 `.zip` 以及 `SHA256SUMS.txt`。打开 .dmg，把 Yatagarasu 拖进“应用程序”即可。
+
+目前的构建尚未经过 Apple 公证。如果通过浏览器下载后 macOS 提示无法打开，请在“应用程序”中按住 Control 点按该应用并选择 **打开**，或在 **系统设置 › 隐私与安全性** 中允许。
 
 ### 测试状态
 
@@ -203,7 +238,7 @@ Yatagarasu 想做的，是在不牺牲原有能力的前提下，把这些工作
 - 本地化
 - 自动化测试与开发工具链
 
-如果你要提交 Pull Request，建议先用 `xcodebuild` 或 `npm run build` 确认项目能够正常构建。
+如果你要提交 Pull Request，建议先用 `xcodebuild` 或 `pnpm build` 确认项目能够正常构建。
 
 ## License
 

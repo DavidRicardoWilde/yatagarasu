@@ -30,7 +30,7 @@ Yatagarasu is currently an actively developed MVP with a working core experience
 
 ### Open-source discovery
 
-- Curated GitHub projects appear on **Discover** and open in the shared package detail page
+- Curated GitHub projects open in the shared package detail page
 - Fetches repository metadata, README content, and recent releases from the GitHub API
 - Renders project READMEs in a native SwiftUI detail experience
 - Parses release assets and prefers installable macOS artifacts such as `.dmg`, `.pkg`, and `.zip`
@@ -57,12 +57,15 @@ Yatagarasu is currently an actively developed MVP with a working core experience
 
 Implemented areas:
 
-- **Discover**
 - **Installed**
 - **Updates**
 - **Setups**
 - **Package detail**
 - **Settings**
+
+Hidden for now:
+
+- **Discover** is built but switched off (`FeatureFlags.showsDiscover`). Its storefront content is hard-coded, so it can't list every version an app offers, link straight to vendor downloads, or show real app icons. It returns once app data comes from a maintained source, such as a backend or a JSON catalog the app refreshes periodically.
 
 Still evolving (shown in the UI as disabled "coming soon" controls; search the code for `pendingFeature()`):
 
@@ -135,14 +138,15 @@ Yatagarasu is a **Turborepo monorepo** with platform-specific apps under `apps/`
 
 - **Turborepo** orchestrates builds across apps
 - Workspace packages are scoped as `@yatagarasu/<platform>`
-- Run `npm run build` from root to build all apps; `npm run build:macos` for just macOS
+- **pnpm** workspaces (`pnpm-workspace.yaml`); the pnpm version is pinned in `package.json`
+- Run `pnpm build` from root to build all apps; `pnpm build:macos` for just macOS
 
 ## Getting started
 
 ### Requirements
 
-- A recent version of Xcode with SwiftUI and SwiftData support
-- macOS development environment
+- macOS 26.2 or later and Xcode 26.2 or later
+- Node.js and [pnpm](https://pnpm.io) (`corepack enable` picks up the pinned version)
 - Homebrew installed locally if you want to use Homebrew package management features
 
 ### Build
@@ -151,13 +155,13 @@ From the repository root:
 
 ```bash
 # Install dependencies (first time only)
-npm install
+pnpm install
 
 # Build all apps
-npm run build
+pnpm build
 
 # Build only macOS
-npm run build:macos
+pnpm build:macos
 
 # Or build directly with xcodebuild
 cd apps/macos
@@ -165,6 +169,37 @@ xcodebuild -project yatagarasu.xcodeproj -scheme yatagarasu -configuration Debug
 ```
 
 You can also open `apps/macos/yatagarasu.xcodeproj` directly in Xcode and run the `yatagarasu` scheme.
+
+### Build a standalone app
+
+To get a `Yatagarasu.app` you can launch from the Applications folder like any other app:
+
+```bash
+# Build a Release, universal app and copy it into /Applications
+pnpm install:macos
+
+# Or only build it, plus a .zip and a drag-to-install .dmg, into apps/macos/dist/
+pnpm package:macos
+```
+
+Both run `apps/macos/scripts/package-app.sh`; see `--help` for options such as `--install-dir ~/Applications`, `--version`, and `--sign` for a Developer ID identity. By default the app is ad-hoc signed, which needs no Apple Developer account.
+
+## Download
+
+Every push to `master` builds the app with GitHub Actions (`.github/workflows/macos-app.yml`) and publishes it to this repository's **Packages** section as `ghcr.io/davidricardowilde/yatagarasu-macos`:
+
+- `edge`: the latest `master` build
+- `X.Y.Z` and `latest`: builds from version tags (`vX.Y.Z`), which are also attached to a GitHub Release for one-click downloads
+
+To download from Packages, use [ORAS](https://oras.land) (`brew install oras`):
+
+```bash
+oras pull ghcr.io/davidricardowilde/yatagarasu-macos:latest
+```
+
+This gives you `Yatagarasu-<version>-macOS.dmg`, the same app as a `.zip`, and `SHA256SUMS.txt`. Open the .dmg and drag Yatagarasu into Applications.
+
+The builds are not notarized by Apple yet. If macOS says the app can't be opened after a browser download, Control-click it in Applications and choose **Open**, or allow it under **System Settings › Privacy & Security**.
 
 ### Test status
 
@@ -199,7 +234,7 @@ Contributions are welcome, especially around:
 - localization
 - test coverage and developer tooling
 
-If you open a pull request, please verify the project still builds with `xcodebuild` or `npm run build` before submitting.
+If you open a pull request, please verify the project still builds with `xcodebuild` or `pnpm build` before submitting.
 
 ## License
 
