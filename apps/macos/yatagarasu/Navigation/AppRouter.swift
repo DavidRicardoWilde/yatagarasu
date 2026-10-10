@@ -17,7 +17,7 @@ enum AppRoute: Hashable {
 @MainActor
 @Observable
 final class AppRouter {
-    var selection: SidebarItem = .discover {
+    var selection: SidebarItem = .home {
         didSet {
             if selection != oldValue {
                 path = []
@@ -30,8 +30,9 @@ final class AppRouter {
     /// Kit highlighted in Setups; set when a kit is opened from Discover.
     var selectedStarterKitID: StarterKit.ID?
 
-    /// Bumped by ⌘F; Discover focuses its search field whenever this changes.
-    private(set) var searchFocusRequest = 0
+    /// Set by ⌘F. The search host focuses its search field and clears the flag; observe it
+    /// with `onChange(of:initial: true)` so a screen that appears because of ⌘F still sees it.
+    var wantsSearchFocus = false
 
     var isActivityPresented = false
 
@@ -50,7 +51,7 @@ final class AppRouter {
     }
 
     func requestSearchFocus() {
-        show(.discover)
-        searchFocusRequest &+= 1
+        show(.searchHost)
+        wantsSearchFocus = true
     }
 }

@@ -136,7 +136,7 @@
 "installed.detail.available" = "Available";
 "installed.detail.about" = "About";
 "installed.empty.title" = "Nothing installed yet";
-"installed.empty.body" = "Install something from Discover and it will show up here.";
+"installed.empty.body" = "Install a starter kit from Setups, or packages with Homebrew, and they'll show up here.";
 "installed.noMatches.title" = "No matches";
 "installed.noMatches.body" = "Nothing installed matches this filter.";
 "installed.uninstall.confirm.title_format" = "Uninstall %@?";
@@ -284,7 +284,7 @@
 "settings.app_icon.footer" = "Changes the icon in the Dock while Yatagarasu is open. Finder keeps showing the classic icon.";
 "settings.specialties.intro" = "Turn on what fits your work. Specialties change what Yatagarasu shows first. Everything stays available through search.";
 "settings.specialties.effects.title" = "What changes for you";
-"settings.specialties.effects.none" = "Nothing extra is on. You see the standard Discover, Installed and Updates screens.";
+"settings.specialties.effects.none" = "Nothing extra is on. Starter kits appear in their standard order.";
 "settings.specialties.effects.kits" = "Starter kits shown first";
 "settings.sources.homebrew.title" = "Homebrew";
 "settings.sources.status" = "Status";

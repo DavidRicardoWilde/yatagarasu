@@ -15,11 +15,12 @@ struct AppCommands: Commands {
         SidebarCommands()
 
         CommandGroup(before: .sidebar) {
-            ForEach(SidebarItem.allCases) { item in
+            // ⌘1, ⌘2, … follow the order of the screens that are enabled.
+            ForEach(Array(SidebarItem.enabledCases.enumerated()), id: \.element) { index, item in
                 Button(L10n.t(item.titleKey)) {
                     router.show(item)
                 }
-                .keyboardShortcut(item.shortcut, modifiers: .command)
+                .keyboardShortcut(KeyEquivalent(Character("\(index + 1)")), modifiers: .command)
             }
             Divider()
         }

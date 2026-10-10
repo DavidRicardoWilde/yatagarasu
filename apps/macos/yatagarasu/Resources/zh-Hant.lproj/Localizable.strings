@@ -136,7 +136,7 @@
 "installed.detail.available" = "可用版本";
 "installed.detail.about" = "簡介";
 "installed.empty.title" = "尚未安裝任何內容";
-"installed.empty.body" = "從「探索」安裝後，就會顯示在這裡。";
+"installed.empty.body" = "透過「裝機」安裝入門套組，或用 Homebrew 安裝套件後，就會顯示在這裡。";
 "installed.noMatches.title" = "沒有相符項目";
 "installed.noMatches.body" = "沒有符合此篩選條件的已安裝項目。";
 "installed.uninstall.confirm.title_format" = "要移除 %@ 嗎？";
@@ -284,7 +284,7 @@
 "settings.app_icon.footer" = "在 Yatagarasu 開啟時更改 Dock 中的圖像。Finder 中仍會顯示經典圖像。";
 "settings.specialties.intro" = "開啟適合你工作的專長。專長會改變 Yatagarasu 優先顯示的內容，所有項目仍可透過搜尋找到。";
 "settings.specialties.effects.title" = "對你的影響";
-"settings.specialties.effects.none" = "未開啟額外專長。你會看到標準的「探索」「已安裝」與「更新」頁面。";
+"settings.specialties.effects.none" = "未開啟額外專長。入門套組依預設順序顯示。";
 "settings.specialties.effects.kits" = "優先顯示的入門套組";
 "settings.sources.homebrew.title" = "Homebrew";
 "settings.sources.status" = "狀態";

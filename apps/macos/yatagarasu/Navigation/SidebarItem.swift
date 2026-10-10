@@ -25,13 +25,23 @@ enum SidebarItem: String, CaseIterable, Identifiable, Hashable {
         }
     }
 
-    /// ⌘1 … ⌘4 in the View menu.
-    var shortcut: KeyEquivalent {
-        switch self {
-        case .discover: "1"
-        case .installed: "2"
-        case .updates: "3"
-        case .setups: "4"
-        }
+    /// Whether the destination ships in this build (see `FeatureFlags`).
+    var isEnabled: Bool {
+        self != .discover || FeatureFlags.showsDiscover
+    }
+
+    /// Destinations shown in the sidebar and the View menu, in order.
+    static var enabledCases: [SidebarItem] {
+        allCases.filter(\.isEnabled)
+    }
+
+    /// Where the app opens.
+    static var home: SidebarItem {
+        enabledCases.first ?? .installed
+    }
+
+    /// The screen whose search field ⌘F focuses.
+    static var searchHost: SidebarItem {
+        FeatureFlags.showsDiscover ? .discover : .installed
     }
 }

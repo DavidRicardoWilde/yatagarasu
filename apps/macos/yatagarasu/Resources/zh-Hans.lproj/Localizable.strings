@@ -136,7 +136,7 @@
 "installed.detail.available" = "可用版本";
 "installed.detail.about" = "简介";
 "installed.empty.title" = "尚未安装任何内容";
-"installed.empty.body" = "从“发现”安装后，就会显示在这里。";
+"installed.empty.body" = "通过“装机”安装入门套件，或用 Homebrew 安装软件包后，就会显示在这里。";
 "installed.noMatches.title" = "没有匹配项";
 "installed.noMatches.body" = "没有符合此筛选条件的已安装项目。";
 "installed.uninstall.confirm.title_format" = "要卸载 %@ 吗？";
@@ -284,7 +284,7 @@
 "settings.app_icon.footer" = "在 Yatagarasu 打开时更改程序坞中的图标。访达中仍显示经典图标。";
 "settings.specialties.intro" = "打开适合你工作的专长。专长会改变 Yatagarasu 优先展示的内容，所有项目仍可通过搜索找到。";
 "settings.specialties.effects.title" = "对你的影响";
-"settings.specialties.effects.none" = "未开启额外专长。你会看到标准的“发现”“已安装”和“更新”页面。";
+"settings.specialties.effects.none" = "未开启额外专长。入门套件按默认顺序显示。";
 "settings.specialties.effects.kits" = "优先显示的入门套件";
 "settings.sources.homebrew.title" = "Homebrew";
 "settings.sources.status" = "状态";

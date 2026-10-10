@@ -136,7 +136,7 @@
 "installed.detail.available" = "利用可能";
 "installed.detail.about" = "概要";
 "installed.empty.title" = "まだ何もインストールされていません";
-"installed.empty.body" = "「発見」からインストールすると、ここに表示されます。";
+"installed.empty.body" = "「セットアップ」のスターターキットや Homebrew でパッケージをインストールすると、ここに表示されます。";
 "installed.noMatches.title" = "一致する項目はありません";
 "installed.noMatches.body" = "この条件に一致するインストール済み項目はありません。";
 "installed.uninstall.confirm.title_format" = "%@ を削除しますか？";
@@ -284,7 +284,7 @@
 "settings.app_icon.footer" = "Yatagarasu の起動中、Dock のアイコンを変更します。Finder ではクラシックのアイコンのまま表示されます。";
 "settings.specialties.intro" = "仕事に合うものをオンにしてください。専門分野によって Yatagarasu が最初に表示する内容が変わります。すべての項目は検索から引き続き利用できます。";
 "settings.specialties.effects.title" = "変わること";
-"settings.specialties.effects.none" = "追加の専門分野はオフです。標準の「発見」「インストール済み」「アップデート」画面が表示されます。";
+"settings.specialties.effects.none" = "追加の専門分野はオフです。スターターキットは標準の順序で表示されます。";
 "settings.specialties.effects.kits" = "先に表示するスターターキット";
 "settings.sources.homebrew.title" = "Homebrew";
 "settings.sources.status" = "状態";

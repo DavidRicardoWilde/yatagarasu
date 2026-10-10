@@ -8,11 +8,13 @@ import SwiftUI
 
 struct InstalledView: View {
     @Environment(AppModel.self) private var model
+    @Environment(AppRouter.self) private var router
     @Query(sort: [SortDescriptor(\GitHubRepositoryCache.name)])
     private var repositories: [GitHubRepositoryCache]
     @State private var filter: InstalledFilter = .all
     @State private var query = ""
     @State private var expandedEntryID: InstalledEntry.ID?
+    @FocusState private var isFilterFocused: Bool
 
     private var entries: [InstalledEntry] {
         let prefix = model.homebrew.prefixURL
@@ -57,6 +59,12 @@ struct InstalledView: View {
             content
         }
         .navigationTitle(L10n.t(SidebarItem.installed.titleKey))
+        .onChange(of: router.wantsSearchFocus, initial: true) { _, wants in
+            if wants, SidebarItem.searchHost == .installed {
+                isFilterFocused = true
+                router.wantsSearchFocus = false
+            }
+        }
     }
 
     private var toolbar: some View {
@@ -81,6 +89,7 @@ struct InstalledView: View {
 
             TextField(L10n.t("installed.filter.prompt"), text: $query)
                 .textFieldStyle(.roundedBorder)
+                .focused($isFilterFocused)
                 .frame(width: 220)
         }
     }

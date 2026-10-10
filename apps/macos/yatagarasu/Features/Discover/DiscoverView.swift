@@ -43,8 +43,11 @@ struct DiscoverView: View {
             }
         }
         .navigationTitle(L10n.t(SidebarItem.discover.titleKey))
-        .onChange(of: router.searchFocusRequest) {
-            isSearchFocused = true
+        .onChange(of: router.wantsSearchFocus, initial: true) { _, wants in
+            if wants {
+                isSearchFocused = true
+                router.wantsSearchFocus = false
+            }
         }
     }
 

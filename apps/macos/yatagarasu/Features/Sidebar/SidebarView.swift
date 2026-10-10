@@ -11,7 +11,7 @@ struct SidebarView: View {
 
     var body: some View {
         List(selection: selection) {
-            ForEach(SidebarItem.allCases) { item in
+            ForEach(SidebarItem.enabledCases) { item in
                 Label(L10n.t(item.titleKey), systemImage: item.symbol)
                     .badge(badgeCount(for: item))
                     .tag(item)
