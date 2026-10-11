@@ -11,6 +11,7 @@ struct InstalledView: View {
     @Environment(AppRouter.self) private var router
     @Query(sort: [SortDescriptor(\GitHubRepositoryCache.name)])
     private var repositories: [GitHubRepositoryCache]
+    @AppStorage("installed.hideDependencies") private var hideDependencies = true
     @State private var filter: InstalledFilter = .all
     @State private var query = ""
     @State private var expandedEntryID: InstalledEntry.ID?
@@ -18,13 +19,21 @@ struct InstalledView: View {
 
     private var entries: [InstalledEntry] {
         let prefix = model.homebrew.prefixURL
-        let homebrew = model.packages.installedPackages.map { package in
+        let packages = model.packages.installedPackages + (hideDependencies ? [] : model.packages.dependencyPackages)
+        let homebrew = packages.sorted {
+            $0.displayName.localizedCaseInsensitiveCompare($1.displayName) == .orderedAscending
+        }.map { package in
             InstalledEntry(package: package, item: model.catalogItem(for: package), homebrewPrefix: prefix)
+        }
+        let external = model.external.packages.map { package in
+            InstalledEntry(external: package, item: model.catalogItem(for: package))
         }
         let github = repositories.filter(\.isTrackedInInstalled).map { repository in
             InstalledEntry(repository: repository, item: model.catalogItem(for: repository))
         }
-        return homebrew + github
+        return (homebrew + external + github).sorted {
+            $0.item.name.localizedCaseInsensitiveCompare($1.item.name) == .orderedAscending
+        }
     }
 
     private var visibleEntries: [InstalledEntry] {
@@ -49,7 +58,7 @@ struct InstalledView: View {
                     Task { await model.refreshPackages() }
                 }
                 .buttonStyle(.action(.secondary))
-                .disabled(!model.homebrew.isAvailable || model.packages.isRefreshingPackages)
+                .disabled(model.isRefreshingAnyPackages)
             }
 
             HomebrewStatusBanner()
@@ -80,12 +89,11 @@ struct InstalledView: View {
 
             Spacer()
 
-            // Dependency-only formulae are always hidden today (see BrewPackage.shouldAppearInInstalledList).
-            Toggle(L10n.t("installed.hideDependencies"), isOn: .constant(true))
+            // Dependency-only formulae are those Homebrew's receipt marks as not installed on request.
+            Toggle(L10n.t("installed.hideDependencies"), isOn: $hideDependencies)
                 .toggleStyle(.checkbox)
                 .font(Typography.callout)
                 .foregroundStyle(Palette.textSecondary)
-                .pendingFeature()
 
             TextField(L10n.t("installed.filter.prompt"), text: $query)
                 .textFieldStyle(.roundedBorder)
@@ -96,18 +104,16 @@ struct InstalledView: View {
 
     @ViewBuilder
     private var content: some View {
-        let isLoading = model.packages.isRefreshingPackages && !model.packages.hasLoadedPackages
+        let isLoading = model.isRefreshingAnyPackages && !model.packages.hasLoadedPackages && !model.external.hasLoaded
 
         if isLoading {
             LoadingStateCard(message: L10n.t("packages.loading"))
         } else if entries.isEmpty {
-            if model.homebrew.isAvailable {
-                EmptyStateCard(
-                    title: L10n.t("installed.empty.title"),
-                    message: L10n.t("installed.empty.body"),
-                    symbol: "shippingbox"
-                )
-            }
+            EmptyStateCard(
+                title: L10n.t("installed.empty.title"),
+                message: L10n.t("installed.empty.body"),
+                symbol: "shippingbox"
+            )
         } else if visibleEntries.isEmpty {
             EmptyStateCard(
                 title: L10n.t("installed.noMatches.title"),

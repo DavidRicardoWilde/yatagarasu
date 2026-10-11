@@ -23,7 +23,7 @@ struct BrewPackageManager: PackageManaging {
         )
 
         let formulae = response.formulae
-            .filter(\.shouldAppearInInstalledList)
+            .filter { !($0.installed ?? []).isEmpty }
             .map(ManagedPackage.init(formula:))
         let casks = response.casks.map(ManagedPackage.init(cask:))
         return (formulae + casks).sorted {
@@ -32,7 +32,7 @@ struct BrewPackageManager: PackageManaging {
     }
 
     func outdatedPackages(brewPath: String) async throws -> [ManagedPackage] {
-        try await installedPackages(brewPath: brewPath).filter(\.isOutdated)
+        try await installedPackages(brewPath: brewPath).filter { $0.isOutdated && !$0.isDependencyOnly }
     }
 
     func install(

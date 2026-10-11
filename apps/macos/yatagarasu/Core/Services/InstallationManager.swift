@@ -123,6 +123,8 @@ struct InstallationTaskItem: Identifiable, Equatable {
     var failureDescription: String?
     var startedAt: Date
     var finishedAt: Date?
+    /// Command shown in the console for non-Homebrew operations; such tasks are never reconciled against brew's list.
+    var customCommand: String?
 
     var isActive: Bool {
         state == .queued || state == .running
@@ -133,6 +135,7 @@ struct InstallationTaskItem: Identifiable, Equatable {
     }
 
     var commandDescription: String {
+        if let customCommand { return customCommand }
         let arguments = operation.commandArguments(for: package.kind) + [package.brewName]
         return "brew " + arguments.joined(separator: " ")
     }
@@ -179,6 +182,7 @@ final class InstallationManager {
     func enqueueOperation(
         package: PackageReference,
         operation: PackageOperationKind,
+        customCommand: String? = nil,
         streamProvider: @escaping @MainActor () async throws -> AsyncThrowingStream<ShellOutputLine, Error>,
         onSuccess: @escaping @MainActor () async -> Void,
         onFailure: @escaping @MainActor (String) -> Void = { _ in }
@@ -188,7 +192,7 @@ final class InstallationManager {
             return
         }
 
-        let task = InstallationTaskItem(
+        var task = InstallationTaskItem(
             id: UUID(),
             package: package,
             operation: operation,
@@ -196,12 +200,14 @@ final class InstallationManager {
             stage: .queued,
             progress: PackageProgressStage.queued.progressValue,
             latestOutput: nil,
-            logLines: ["$ brew \((operation.commandArguments(for: package.kind) + [package.brewName]).joined(separator: " "))"],
+            logLines: [],
             failureDescription: nil,
             startedAt: Date(),
-            finishedAt: nil
+            finishedAt: nil,
+            customCommand: customCommand
         )
 
+        task.logLines = ["$ \(task.commandDescription)"]
         tasks.append(task)
         pendingOperations[task.id] = PendingOperation(
             streamProvider: streamProvider,
@@ -212,8 +218,30 @@ final class InstallationManager {
         runNextIfNeeded()
     }
 
+    /// Shows an operation that couldn't even start (e.g. the managing tool vanished) as a failed task.
+    func recordFailure(package: PackageReference, operation: PackageOperationKind, message: String) {
+        let now = Date()
+        tasks.append(
+            InstallationTaskItem(
+                id: UUID(),
+                package: package,
+                operation: operation,
+                state: .failed,
+                stage: .failed,
+                progress: 0.12,
+                latestOutput: message,
+                logLines: ["[error] \(message)"],
+                failureDescription: message,
+                startedAt: now,
+                finishedAt: now,
+                customCommand: operation.rawValue
+            )
+        )
+        pruneFinishedTasks()
+    }
+
     func reconcileInstalledPackages(_ installedPackages: [ManagedPackage]) {
-        for task in tasks where task.isActive {
+        for task in tasks where task.isActive && task.customCommand == nil {
             switch task.operation {
             case .install:
                 if installedPackages.contains(where: { $0.matches(task.package) }) {

@@ -15,6 +15,7 @@ import Observation
 final class AppModel {
     let homebrew: HomebrewEnvironment
     let packages: PackageWorkspace
+    let external: ExternalPackageWorkspace
     let openSource: OpenSourceCatalogWorkspace
     let catalog: CuratedCatalog
 
@@ -37,6 +38,7 @@ final class AppModel {
     ) {
         self.homebrew = homebrew
         self.packages = packages
+        self.external = ExternalPackageWorkspace(installationManager: packages.installationManager)
         self.openSource = openSource
         self.catalog = catalog
     }
@@ -64,6 +66,24 @@ final class AppModel {
 
     func refreshPackages() async {
         await packages.refreshPackages(brewPath: homebrew.brewPath ?? "", isBrewAvailable: homebrew.isAvailable)
+        await external.refresh(
+            brewManagedAppNames: brewManagedAppNames,
+            homebrewPrefix: homebrew.prefixURL?.path(percentEncoded: false)
+        )
+    }
+
+    var isRefreshingAnyPackages: Bool {
+        packages.isRefreshingPackages || external.isRefreshing
+    }
+
+    /// Updates available across Homebrew and every other source; drives the sidebar badge.
+    var outdatedCount: Int {
+        packages.outdatedPackages.count + external.outdatedPackages.count
+    }
+
+    /// Apps that Homebrew casks own, so the app scan doesn't list them a second time.
+    private var brewManagedAppNames: Set<String> {
+        Set(packages.installedPackages.flatMap(\.appBundleNames))
     }
 
     // MARK: Package operations
@@ -73,6 +93,10 @@ final class AppModel {
     }
 
     func update(_ package: PackageReference) {
+        if package.externalSource != nil {
+            external.update(package)
+            return
+        }
         packages.update(package: package, brewPath: homebrew.brewPath ?? "", isBrewAvailable: homebrew.isAvailable)
     }
 
@@ -83,6 +107,10 @@ final class AppModel {
     }
 
     func uninstall(_ package: PackageReference) {
+        if package.externalSource != nil {
+            external.uninstall(package)
+            return
+        }
         packages.uninstall(package: package, brewPath: homebrew.brewPath ?? "", isBrewAvailable: homebrew.isAvailable)
     }
 
@@ -99,6 +127,10 @@ final class AppModel {
     /// The curated entry for an installed package, or a plain one built from Homebrew's metadata.
     func catalogItem(for package: ManagedPackage) -> CatalogItem {
         catalog.item(matching: package.reference) ?? CatalogItem(package: package)
+    }
+
+    func catalogItem(for package: ExternalPackage) -> CatalogItem {
+        CatalogItem(external: package)
     }
 
     func catalogItem(for repository: GitHubRepositoryCache) -> CatalogItem {

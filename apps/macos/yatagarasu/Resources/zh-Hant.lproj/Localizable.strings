@@ -112,11 +112,13 @@
 "specialty.administration.blurb" = "管理工具、掃描器、簽章與裝置原則";
 
 /* Installed */
-"installed.subtitle" = "此 Mac 上的 Homebrew 套件與 GitHub 安裝";
+"installed.subtitle" = "此 Mac 上的 App 與套件，來自 Homebrew、各語言套件管理器和 GitHub";
 "installed.action.exportBrewfile" = "匯出 Brewfile…";
 "installed.action.rescan" = "重新掃描";
 "installed.action.details" = "詳細資訊";
 "installed.action.showInFinder" = "在 Finder 中顯示";
+"installed.action.open" = "打開";
+"installed.action.moveToTrash" = "移到垃圾桶";
 "installed.filter.label" = "顯示";
 "installed.filter.all" = "全部";
 "installed.filter.apps" = "App";
@@ -135,12 +137,14 @@
 "installed.detail.type" = "類型";
 "installed.detail.available" = "可用版本";
 "installed.detail.about" = "簡介";
+"installed.detail.bundleID" = "Bundle ID";
 "installed.empty.title" = "尚未安裝任何內容";
 "installed.empty.body" = "透過「裝機」安裝入門套組，或用 Homebrew 安裝套件後，就會顯示在這裡。";
 "installed.noMatches.title" = "沒有相符項目";
 "installed.noMatches.body" = "沒有符合此篩選條件的已安裝項目。";
 "installed.uninstall.confirm.title_format" = "要移除 %@ 嗎？";
 "installed.uninstall.confirm.body" = "Homebrew 會將其從此 Mac 移除。你隨時可以重新安裝。";
+"installed.uninstall.confirm.app.body" = "App 將被移到垃圾桶。你可以從垃圾桶中還原，或日後重新安裝。";
 
 /* Updates */
 "updates.subtitle.none" = "全部已是最新";
@@ -190,6 +194,22 @@
 "source.homebrewCask.note" = "社群維護的配方，透過 Yatagarasu 更新";
 "source.homebrewFormula.title" = "Homebrew";
 "source.homebrewFormula.note" = "由 Homebrew 維護，透過 Yatagarasu 更新";
+"source.external.unknown.title" = "未知";
+"source.external.appStore.title" = "Mac App Store";
+"source.external.npm.title" = "npm";
+"source.external.pnpm.title" = "pnpm";
+"source.external.yarn.title" = "Yarn";
+"source.external.mise.title" = "mise";
+"source.external.pipx.title" = "pipx";
+"source.external.uv.title" = "uv";
+"source.external.cargo.title" = "Cargo";
+"source.external.bun.title" = "Bun";
+"source.external.setapp.title" = "Setapp";
+"source.external.installerPackage.title" = "安裝程式套件";
+"source.external.pip.title" = "pip";
+"source.external.gem.title" = "RubyGems";
+"source.external.rustup.title" = "rustup";
+"installed.detail.installerID_format" = "由安裝套件 %@ 安裝";
 "source.website.title" = "官方網站";
 "source.website.note_format" = "來自 %@ 的安裝程式";
 "source.githubRelease.title" = "GitHub 發行版本";

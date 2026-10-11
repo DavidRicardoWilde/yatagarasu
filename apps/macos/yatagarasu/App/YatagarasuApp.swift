@@ -20,7 +20,6 @@ struct YatagarasuApp: App {
                 .environment(model)
                 .environment(router)
         }
-        .windowStyle(.hiddenTitleBar)
         .defaultSize(width: Layout.defaultWindowWidth, height: Layout.defaultWindowHeight)
         .modelContainer(modelContainer)
         .commands {

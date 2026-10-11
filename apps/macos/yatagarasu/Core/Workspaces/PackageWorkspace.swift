@@ -12,7 +12,9 @@ import Observation
 @Observable
 final class PackageWorkspace {
     let installedRegistry = InstalledPackageRegistry()
+    /// Packages the user installed directly (plus casks); dependency-only formulae are in `dependencyPackages`.
     var installedPackages: [ManagedPackage] = []
+    var dependencyPackages: [ManagedPackage] = []
     var outdatedPackages: [ManagedPackage] = []
     var isRefreshingPackages = false
     var hasLoadedPackages = false
@@ -29,6 +31,7 @@ final class PackageWorkspace {
         guard isBrewAvailable, !brewPath.isEmpty else {
             installedRegistry.clear()
             installedPackages = []
+            dependencyPackages = []
             outdatedPackages = []
             hasLoadedPackages = false
             lastErrorMessage = nil
@@ -50,7 +53,8 @@ final class PackageWorkspace {
 
         do {
             let packages = try await packageManager.installedPackages(brewPath: brewPath)
-            installedRegistry.replacePackages(packages, source: .homebrew)
+            installedRegistry.replacePackages(packages.filter { !$0.isDependencyOnly }, source: .homebrew)
+            dependencyPackages = packages.filter(\.isDependencyOnly)
             installedPackages = installedRegistry.packages
             outdatedPackages = installedRegistry.outdatedPackages
             installationManager.reconcileInstalledPackages(installedPackages)

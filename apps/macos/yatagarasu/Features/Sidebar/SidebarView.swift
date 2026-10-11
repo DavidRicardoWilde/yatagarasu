@@ -43,7 +43,7 @@ struct SidebarView: View {
     }
 
     private func badgeCount(for item: SidebarItem) -> Int {
-        item == .updates ? model.packages.outdatedPackages.count : 0
+        item == .updates ? model.outdatedCount : 0
     }
 
     private var brandHeader: some View {

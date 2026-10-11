@@ -31,7 +31,8 @@ struct RootView: View {
                     }
             }
         }
-        .toolbarVisibility(.hidden, for: .windowToolbar)
+        .toolbarBackgroundVisibility(.hidden, for: .windowToolbar)
+        .toolbar(removing: .title)
         .frame(minWidth: Layout.minimumWindowWidth, minHeight: Layout.minimumWindowHeight)
         // Strings come from L10n at render time, so rebuild the tree when the app language changes.
         .id(languageCode)

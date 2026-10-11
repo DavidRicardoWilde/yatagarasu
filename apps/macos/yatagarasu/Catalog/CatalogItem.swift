@@ -66,6 +66,16 @@ extension CatalogItem {
         )
     }
 
+    /// An app or tool that Homebrew doesn't manage.
+    init(external package: ExternalPackage) {
+        self.init(
+            id: "external:\(package.id)",
+            name: package.name,
+            summary: package.installerID.map { .verbatim(L10n.f("installed.detail.installerID_format", $0)) }
+                ?? .verbatim(package.summary ?? "")
+        )
+    }
+
     /// A cached GitHub repository that isn't in the curated catalog.
     init(repository: GitHubRepositoryCache) {
         self.init(
