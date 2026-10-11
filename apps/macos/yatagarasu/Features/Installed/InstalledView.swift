@@ -11,6 +11,7 @@ struct InstalledView: View {
     @Environment(AppRouter.self) private var router
     @Query(sort: [SortDescriptor(\GitHubRepositoryCache.name)])
     private var repositories: [GitHubRepositoryCache]
+    @AppStorage("installed.hideDependencies") private var hideDependencies = true
     @State private var filter: InstalledFilter = .all
     @State private var query = ""
     @State private var expandedEntryID: InstalledEntry.ID?
@@ -18,7 +19,10 @@ struct InstalledView: View {
 
     private var entries: [InstalledEntry] {
         let prefix = model.homebrew.prefixURL
-        let homebrew = model.packages.installedPackages.map { package in
+        let packages = model.packages.installedPackages + (hideDependencies ? [] : model.packages.dependencyPackages)
+        let homebrew = packages.sorted {
+            $0.displayName.localizedCaseInsensitiveCompare($1.displayName) == .orderedAscending
+        }.map { package in
             InstalledEntry(package: package, item: model.catalogItem(for: package), homebrewPrefix: prefix)
         }
         let github = repositories.filter(\.isTrackedInInstalled).map { repository in
@@ -80,12 +84,11 @@ struct InstalledView: View {
 
             Spacer()
 
-            // Dependency-only formulae are always hidden today (see BrewPackage.shouldAppearInInstalledList).
-            Toggle(L10n.t("installed.hideDependencies"), isOn: .constant(true))
+            // Dependency-only formulae are those Homebrew's receipt marks as not installed on request.
+            Toggle(L10n.t("installed.hideDependencies"), isOn: $hideDependencies)
                 .toggleStyle(.checkbox)
                 .font(Typography.callout)
                 .foregroundStyle(Palette.textSecondary)
-                .pendingFeature()
 
             TextField(L10n.t("installed.filter.prompt"), text: $query)
                 .textFieldStyle(.roundedBorder)

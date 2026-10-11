@@ -100,6 +100,8 @@ struct ManagedPackage: Identifiable, Hashable, Sendable {
     /// Newest version Homebrew knows about; differs from `version` when `isOutdated`.
     let latestVersion: String?
     let isOutdated: Bool
+    /// Installed only to satisfy another package (never requested directly); hidden from Installed by default.
+    let isDependencyOnly: Bool
 
     var id: String { reference.id }
     var displayName: String { reference.displayName }
@@ -113,13 +115,15 @@ struct ManagedPackage: Identifiable, Hashable, Sendable {
         summary: String?,
         version: String?,
         latestVersion: String? = nil,
-        isOutdated: Bool
+        isOutdated: Bool,
+        isDependencyOnly: Bool = false
     ) {
         self.reference = reference
         self.summary = summary
         self.version = version
         self.latestVersion = latestVersion
         self.isOutdated = isOutdated
+        self.isDependencyOnly = isDependencyOnly
     }
 
     init(formula: BrewPackage) {
@@ -134,7 +138,8 @@ struct ManagedPackage: Identifiable, Hashable, Sendable {
             summary: formula.desc,
             version: formula.installed?.last?.version ?? formula.versions?.stable,
             latestVersion: formula.versions?.stable,
-            isOutdated: formula.outdated ?? false
+            isOutdated: formula.outdated ?? false,
+            isDependencyOnly: !formula.shouldAppearInInstalledList
         )
     }
 
