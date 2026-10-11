@@ -127,7 +127,7 @@ private struct InstalledRow: View {
     }
 
     private var activeTask: InstallationTaskItem? {
-        entry.homebrewPackage.flatMap { model.installationManager.activeTask(for: $0.id) }
+        entry.operationReference.flatMap { model.installationManager.activeTask(for: $0.id) }
     }
 }
 
@@ -164,6 +164,20 @@ private struct InstalledRowDetail: View {
                             }
                         }
                     }
+                    if let package = entry.externalPackage {
+                        if package.isApp {
+                            detailRow("installed.detail.bundleID") {
+                                Text(package.identifier)
+                                    .font(Typography.code)
+                                    .textSelection(.enabled)
+                            }
+                        }
+                        if package.isOutdated, let latest = package.latestVersion {
+                            detailRow("installed.detail.available") {
+                                Text(latest).monospacedDigit()
+                            }
+                        }
+                    }
                     if !entry.item.summary.text.isEmpty {
                         detailRow("installed.detail.about") {
                             Text(entry.item.summary.text)
@@ -191,13 +205,13 @@ private struct InstalledRowDetail: View {
             L10n.f("installed.uninstall.confirm.title_format", entry.item.name),
             isPresented: $isConfirmingUninstall
         ) {
-            Button(L10n.t("packages.action.uninstall"), role: .destructive) {
-                if let package = entry.homebrewPackage {
-                    model.uninstall(package.reference)
+            Button(L10n.t(entry.externalPackage?.isApp == true ? "installed.action.moveToTrash" : "packages.action.uninstall"), role: .destructive) {
+                if let reference = entry.operationReference {
+                    model.uninstall(reference)
                 }
             }
         } message: {
-            Text(L10n.t("installed.uninstall.confirm.body"))
+            Text(L10n.t(entry.externalPackage?.isApp == true ? "installed.uninstall.confirm.app.body" : "installed.uninstall.confirm.body"))
         }
     }
 
@@ -210,6 +224,21 @@ private struct InstalledRowDetail: View {
                 }
                 .buttonStyle(.action(.primary, size: .small, fillsWidth: true))
                 .disabled(activeTask != nil || !model.homebrew.isAvailable)
+            } else if let package = entry.externalPackage {
+                if package.isOutdated || package.supportsManualUpdate {
+                    Button(L10n.t("packages.action.update")) {
+                        model.update(package.reference)
+                    }
+                    .buttonStyle(.action(.primary, size: .small, fillsWidth: true))
+                    .disabled(activeTask != nil)
+                } else if package.isApp {
+                    Button(L10n.t("installed.action.open")) {
+                        if let location = package.location {
+                            NSWorkspace.shared.open(location)
+                        }
+                    }
+                    .buttonStyle(.action(.primary, size: .small, fillsWidth: true))
+                }
             } else {
                 Button(L10n.t("installed.action.details")) {
                     router.open(entry.item)
@@ -231,12 +260,13 @@ private struct InstalledRowDetail: View {
                 .buttonStyle(.action(.tonal(), size: .small, fillsWidth: true))
             }
 
-            if entry.homebrewPackage != nil {
-                Button(L10n.t("packages.action.uninstall") + "…") {
+            if entry.operationReference != nil, entry.externalPackage?.canUninstall ?? true {
+                let title = entry.externalPackage?.isApp == true ? "installed.action.moveToTrash" : "packages.action.uninstall"
+                Button(L10n.t(title) + "…") {
                     isConfirmingUninstall = true
                 }
                 .buttonStyle(.action(.tonal(foreground: Tone.critical.foreground), size: .small, fillsWidth: true))
-                .disabled(activeTask != nil || !model.homebrew.isAvailable)
+                .disabled(activeTask != nil || (entry.homebrewPackage != nil && !model.homebrew.isAvailable))
             }
         }
     }

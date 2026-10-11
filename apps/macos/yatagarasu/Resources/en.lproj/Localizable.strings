@@ -112,11 +112,13 @@
 "specialty.administration.blurb" = "Admin tools, scanners, signatures and device policies";
 
 /* Installed */
-"installed.subtitle" = "Homebrew packages and GitHub installs on this Mac";
+"installed.subtitle" = "Apps and packages on this Mac, from Homebrew, language package managers and GitHub";
 "installed.action.exportBrewfile" = "Export Brewfile…";
 "installed.action.rescan" = "Rescan";
 "installed.action.details" = "Details";
 "installed.action.showInFinder" = "Show in Finder";
+"installed.action.open" = "Open";
+"installed.action.moveToTrash" = "Move to Trash";
 "installed.filter.label" = "Show";
 "installed.filter.all" = "All";
 "installed.filter.apps" = "Apps";
@@ -135,12 +137,14 @@
 "installed.detail.type" = "Type";
 "installed.detail.available" = "Available";
 "installed.detail.about" = "About";
+"installed.detail.bundleID" = "Bundle ID";
 "installed.empty.title" = "Nothing installed yet";
 "installed.empty.body" = "Install a starter kit from Setups, or packages with Homebrew, and they'll show up here.";
 "installed.noMatches.title" = "No matches";
 "installed.noMatches.body" = "Nothing installed matches this filter.";
 "installed.uninstall.confirm.title_format" = "Uninstall %@?";
 "installed.uninstall.confirm.body" = "Homebrew will remove it from this Mac. You can install it again at any time.";
+"installed.uninstall.confirm.app.body" = "The app will be moved to the Trash. You can restore it from there, or reinstall it later.";
 
 /* Updates */
 "updates.subtitle.none" = "Everything is up to date";
@@ -190,6 +194,22 @@
 "source.homebrewCask.note" = "Community recipe, updates through Yatagarasu";
 "source.homebrewFormula.title" = "Homebrew";
 "source.homebrewFormula.note" = "Maintained by Homebrew, updates through Yatagarasu";
+"source.external.unknown.title" = "Unknown";
+"source.external.appStore.title" = "Mac App Store";
+"source.external.npm.title" = "npm";
+"source.external.pnpm.title" = "pnpm";
+"source.external.yarn.title" = "Yarn";
+"source.external.mise.title" = "mise";
+"source.external.pipx.title" = "pipx";
+"source.external.uv.title" = "uv";
+"source.external.cargo.title" = "Cargo";
+"source.external.bun.title" = "Bun";
+"source.external.setapp.title" = "Setapp";
+"source.external.installerPackage.title" = "Installer package";
+"source.external.pip.title" = "pip";
+"source.external.gem.title" = "RubyGems";
+"source.external.rustup.title" = "rustup";
+"installed.detail.installerID_format" = "Installed by package %@";
 "source.website.title" = "Official website";
 "source.website.note_format" = "Installer from %@";
 "source.githubRelease.title" = "GitHub releases";

@@ -14,11 +14,17 @@ struct UpdatesView: View {
     @Environment(AppModel.self) private var model
     @AppStorage(UpdatePreferences.selectsMajorUpdatesKey) private var selectsMajorUpdates = false
     /// Explicit checkbox choices; anything absent falls back to the default for its change size.
-    @State private var selectionOverrides: [ManagedPackage.ID: Bool] = [:]
+    @State private var selectionOverrides: [UpdateCandidate.ID: Bool] = [:]
 
     private var candidates: [UpdateCandidate] {
-        model.packages.outdatedPackages.map { package in
+        let homebrew = model.packages.outdatedPackages.map { package in
             UpdateCandidate(package: package, item: model.catalogItem(for: package))
+        }
+        let external = model.external.outdatedPackages.map { package in
+            UpdateCandidate(external: package, item: model.catalogItem(for: package))
+        }
+        return (homebrew + external).sorted {
+            $0.item.name.localizedCaseInsensitiveCompare($1.item.name) == .orderedAscending
         }
     }
 
@@ -37,13 +43,13 @@ struct UpdatesView: View {
                     Task { await model.refreshPackages() }
                 }
                 .buttonStyle(.action(.secondary))
-                .disabled(!model.homebrew.isAvailable || model.packages.isRefreshingPackages)
+                .disabled(model.isRefreshingAnyPackages)
 
                 Button(L10n.p("updates.action.updateSelected", selectedCandidates.count)) {
-                    model.update(selectedCandidates.map(\.package.reference))
+                    model.update(selectedCandidates.map(\.reference))
                 }
                 .buttonStyle(.action(.primary))
-                .disabled(selectedCandidates.isEmpty || !model.homebrew.isAvailable)
+                .disabled(selectedCandidates.isEmpty)
             }
 
             HomebrewStatusBanner()
@@ -57,22 +63,20 @@ struct UpdatesView: View {
                 )
             }
 
-            if model.packages.isRefreshingPackages, !model.packages.hasLoadedPackages {
+            if model.isRefreshingAnyPackages, !model.packages.hasLoadedPackages, !model.external.hasLoaded {
                 LoadingStateCard(message: L10n.t("packages.loading"))
             } else if candidates.isEmpty {
-                if model.homebrew.isAvailable {
-                    EmptyStateCard(
-                        title: L10n.t("updates.empty.title"),
-                        message: L10n.t("updates.empty.body"),
-                        symbol: "checkmark.circle"
-                    )
-                }
+                EmptyStateCard(
+                    title: L10n.t("updates.empty.title"),
+                    message: L10n.t("updates.empty.body"),
+                    symbol: "checkmark.circle"
+                )
             } else {
                 CardList(data: candidates) { candidate in
                     UpdateRow(
                         candidate: candidate,
                         isSelected: selectionBinding(for: candidate),
-                        activeTask: model.installationManager.activeTask(for: candidate.package.id)
+                        activeTask: model.installationManager.activeTask(for: candidate.id)
                     )
                 }
             }
@@ -99,15 +103,31 @@ struct UpdatesView: View {
 }
 
 struct UpdateCandidate: Identifiable {
-    let package: ManagedPackage
+    let reference: PackageReference
     let item: CatalogItem
+    let version: String?
+    let latestVersion: String?
+    /// Where the update comes from when that isn't Homebrew (npm, pnpm, mise…); shown under the name.
+    let sourceTitle: String?
     let change: VersionChange
 
-    var id: ManagedPackage.ID { package.id }
+    var id: String { reference.id }
 
     init(package: ManagedPackage, item: CatalogItem) {
-        self.package = package
+        self.reference = package.reference
         self.item = item
+        self.version = package.version
+        self.latestVersion = package.latestVersion
+        self.sourceTitle = nil
+        self.change = VersionChange.between(package.version, and: package.latestVersion)
+    }
+
+    init(external package: ExternalPackage, item: CatalogItem) {
+        self.reference = package.reference
+        self.item = item
+        self.version = package.version
+        self.latestVersion = package.latestVersion
+        self.sourceTitle = L10n.t(package.source.titleKey)
         self.change = VersionChange.between(package.version, and: package.latestVersion)
     }
 }
@@ -132,8 +152,8 @@ private struct UpdateRow: View {
                 Text(candidate.item.name)
                     .font(Typography.bodyEmphasized)
                     .foregroundStyle(Palette.textPrimary)
-                if !candidate.item.summary.text.isEmpty {
-                    Text(candidate.item.summary.text)
+                if let detail = candidate.sourceTitle ?? (candidate.item.summary.text.isEmpty ? nil : candidate.item.summary.text) {
+                    Text(detail)
                         .font(Typography.callout)
                         .foregroundStyle(Palette.textSecondary)
                         .lineLimit(1)
@@ -160,8 +180,8 @@ private struct UpdateRow: View {
     }
 
     private var versionChangeText: String {
-        let from = candidate.package.version ?? "—"
-        let to = candidate.package.latestVersion ?? "—"
+        let from = candidate.version ?? "—"
+        let to = candidate.latestVersion ?? "—"
         return "\(from) → \(to)"
     }
 }

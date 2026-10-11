@@ -98,8 +98,31 @@ struct BrewCaskPackage: Codable, Identifiable, Sendable {
     let outdated: Bool?
     let deprecated: Bool?
     let disabled: Bool?
+    let artifacts: BrewJSONValue?
 
     var id: String { fullToken ?? token }
+
+    /// `.app` bundles this cask installs, e.g. `["Raycast.app"]`; used to avoid listing them as manual installs.
+    var appBundleNames: Set<String> {
+        guard case let .array(items)? = artifacts else { return [] }
+        var names = Set<String>()
+        for item in items {
+            guard case let .object(artifact) = item, case let .array(apps)? = artifact["app"] else { continue }
+            for app in apps {
+                switch app {
+                case let .string(name):
+                    names.insert(URL(fileURLWithPath: name).lastPathComponent)
+                case let .object(options):
+                    if case let .string(target)? = options["target"] {
+                        names.insert(URL(fileURLWithPath: target).lastPathComponent)
+                    }
+                default:
+                    break
+                }
+            }
+        }
+        return names
+    }
 }
 
 enum BrewJSONValue: Codable, Sendable {

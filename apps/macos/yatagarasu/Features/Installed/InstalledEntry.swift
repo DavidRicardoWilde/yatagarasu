@@ -39,6 +39,7 @@ struct InstalledEntry: Identifiable {
     enum Origin {
         case homebrew(ManagedPackage)
         case github(GitHubRepositoryCache)
+        case external(ExternalPackage)
     }
 
     let id: String
@@ -53,6 +54,15 @@ struct InstalledEntry: Identifiable {
 
     var homebrewPackage: ManagedPackage? {
         if case let .homebrew(package) = origin { package } else { nil }
+    }
+
+    var externalPackage: ExternalPackage? {
+        if case let .external(package) = origin { package } else { nil }
+    }
+
+    /// What `AppModel.update`/`uninstall` take, for entries that can be managed from here.
+    var operationReference: PackageReference? {
+        homebrewPackage?.reference ?? externalPackage?.reference
     }
 
     var repository: GitHubRepositoryCache? {
@@ -75,6 +85,19 @@ extension InstalledEntry {
             status: package.isOutdated ? .updateAvailable : .upToDate,
             origin: .homebrew(package),
             location: homebrewPrefix?.appending(path: folder).appending(path: shortName)
+        )
+    }
+
+    init(external package: ExternalPackage, item: CatalogItem) {
+        self.init(
+            id: "external:\(package.id)",
+            item: item,
+            version: package.version,
+            sourceTitle: L10n.t(package.source.titleKey),
+            category: package.isApp ? .app : .commandLine,
+            status: package.isOutdated ? .updateAvailable : (package.canCheckForUpdates ? .upToDate : .tracked),
+            origin: .external(package),
+            location: package.location
         )
     }
 

@@ -25,10 +25,15 @@ struct InstalledView: View {
         }.map { package in
             InstalledEntry(package: package, item: model.catalogItem(for: package), homebrewPrefix: prefix)
         }
+        let external = model.external.packages.map { package in
+            InstalledEntry(external: package, item: model.catalogItem(for: package))
+        }
         let github = repositories.filter(\.isTrackedInInstalled).map { repository in
             InstalledEntry(repository: repository, item: model.catalogItem(for: repository))
         }
-        return homebrew + github
+        return (homebrew + external + github).sorted {
+            $0.item.name.localizedCaseInsensitiveCompare($1.item.name) == .orderedAscending
+        }
     }
 
     private var visibleEntries: [InstalledEntry] {
@@ -53,7 +58,7 @@ struct InstalledView: View {
                     Task { await model.refreshPackages() }
                 }
                 .buttonStyle(.action(.secondary))
-                .disabled(!model.homebrew.isAvailable || model.packages.isRefreshingPackages)
+                .disabled(model.isRefreshingAnyPackages)
             }
 
             HomebrewStatusBanner()
@@ -99,18 +104,16 @@ struct InstalledView: View {
 
     @ViewBuilder
     private var content: some View {
-        let isLoading = model.packages.isRefreshingPackages && !model.packages.hasLoadedPackages
+        let isLoading = model.isRefreshingAnyPackages && !model.packages.hasLoadedPackages && !model.external.hasLoaded
 
         if isLoading {
             LoadingStateCard(message: L10n.t("packages.loading"))
         } else if entries.isEmpty {
-            if model.homebrew.isAvailable {
-                EmptyStateCard(
-                    title: L10n.t("installed.empty.title"),
-                    message: L10n.t("installed.empty.body"),
-                    symbol: "shippingbox"
-                )
-            }
+            EmptyStateCard(
+                title: L10n.t("installed.empty.title"),
+                message: L10n.t("installed.empty.body"),
+                symbol: "shippingbox"
+            )
         } else if visibleEntries.isEmpty {
             EmptyStateCard(
                 title: L10n.t("installed.noMatches.title"),

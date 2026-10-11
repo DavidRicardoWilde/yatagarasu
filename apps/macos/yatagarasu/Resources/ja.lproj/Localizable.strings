@@ -112,11 +112,13 @@
 "specialty.administration.blurb" = "管理ツール、スキャナ、署名、デバイスポリシー";
 
 /* Installed */
-"installed.subtitle" = "この Mac 上の Homebrew パッケージと GitHub からのインストール";
+"installed.subtitle" = "この Mac 上のアプリとパッケージ(Homebrew、各言語のパッケージマネージャー、GitHub)";
 "installed.action.exportBrewfile" = "Brewfile を書き出す…";
 "installed.action.rescan" = "再スキャン";
 "installed.action.details" = "詳細";
 "installed.action.showInFinder" = "Finder に表示";
+"installed.action.open" = "開く";
+"installed.action.moveToTrash" = "ゴミ箱に入れる";
 "installed.filter.label" = "表示";
 "installed.filter.all" = "すべて";
 "installed.filter.apps" = "アプリ";
@@ -135,12 +137,14 @@
 "installed.detail.type" = "種類";
 "installed.detail.available" = "利用可能";
 "installed.detail.about" = "概要";
+"installed.detail.bundleID" = "バンドル ID";
 "installed.empty.title" = "まだ何もインストールされていません";
 "installed.empty.body" = "「セットアップ」のスターターキットや Homebrew でパッケージをインストールすると、ここに表示されます。";
 "installed.noMatches.title" = "一致する項目はありません";
 "installed.noMatches.body" = "この条件に一致するインストール済み項目はありません。";
 "installed.uninstall.confirm.title_format" = "%@ を削除しますか？";
 "installed.uninstall.confirm.body" = "Homebrew がこの Mac から削除します。いつでも再インストールできます。";
+"installed.uninstall.confirm.app.body" = "アプリはゴミ箱に移動されます。ゴミ箱から戻すか、後で再インストールできます。";
 
 /* Updates */
 "updates.subtitle.none" = "すべて最新です";
@@ -190,6 +194,22 @@
 "source.homebrewCask.note" = "コミュニティのレシピ。Yatagarasu から更新できます";
 "source.homebrewFormula.title" = "Homebrew";
 "source.homebrewFormula.note" = "Homebrew が管理。Yatagarasu から更新できます";
+"source.external.unknown.title" = "不明";
+"source.external.appStore.title" = "Mac App Store";
+"source.external.npm.title" = "npm";
+"source.external.pnpm.title" = "pnpm";
+"source.external.yarn.title" = "Yarn";
+"source.external.mise.title" = "mise";
+"source.external.pipx.title" = "pipx";
+"source.external.uv.title" = "uv";
+"source.external.cargo.title" = "Cargo";
+"source.external.bun.title" = "Bun";
+"source.external.setapp.title" = "Setapp";
+"source.external.installerPackage.title" = "インストーラパッケージ";
+"source.external.pip.title" = "pip";
+"source.external.gem.title" = "RubyGems";
+"source.external.rustup.title" = "rustup";
+"installed.detail.installerID_format" = "パッケージ %@ によるインストール";
 "source.website.title" = "公式 Web サイト";
 "source.website.note_format" = "%@ のインストーラ";
 "source.githubRelease.title" = "GitHub リリース";

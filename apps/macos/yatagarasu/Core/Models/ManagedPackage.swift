@@ -71,17 +71,22 @@ struct PackageReference: Identifiable, Hashable, Sendable {
     let displayName: String
     let brewName: String
     let kind: HomebrewPackageKind
+    /// Set when this isn't a Homebrew package at all (npm, pnpm, Yarn, mise or an app bundle);
+    /// `kind` is then meaningless and operations route to `ExternalPackageWorkspace`.
+    let externalSource: ExternalSourceKind?
 
     init(
         id: String? = nil,
         displayName: String,
         brewName: String,
-        kind: HomebrewPackageKind
+        kind: HomebrewPackageKind,
+        externalSource: ExternalSourceKind? = nil
     ) {
         self.id = id ?? brewName
         self.displayName = displayName
         self.brewName = brewName
         self.kind = kind
+        self.externalSource = externalSource
     }
 
     var lookupKeys: [String] {
@@ -102,6 +107,8 @@ struct ManagedPackage: Identifiable, Hashable, Sendable {
     let isOutdated: Bool
     /// Installed only to satisfy another package (never requested directly); hidden from Installed by default.
     let isDependencyOnly: Bool
+    /// For casks: the `.app` bundles it installs.
+    let appBundleNames: Set<String>
 
     var id: String { reference.id }
     var displayName: String { reference.displayName }
@@ -116,7 +123,8 @@ struct ManagedPackage: Identifiable, Hashable, Sendable {
         version: String?,
         latestVersion: String? = nil,
         isOutdated: Bool,
-        isDependencyOnly: Bool = false
+        isDependencyOnly: Bool = false,
+        appBundleNames: Set<String> = []
     ) {
         self.reference = reference
         self.summary = summary
@@ -124,6 +132,7 @@ struct ManagedPackage: Identifiable, Hashable, Sendable {
         self.latestVersion = latestVersion
         self.isOutdated = isOutdated
         self.isDependencyOnly = isDependencyOnly
+        self.appBundleNames = appBundleNames
     }
 
     init(formula: BrewPackage) {
@@ -155,7 +164,8 @@ struct ManagedPackage: Identifiable, Hashable, Sendable {
             summary: cask.desc,
             version: cask.installed?.firstStringValue ?? cask.version,
             latestVersion: cask.version,
-            isOutdated: cask.outdated ?? false
+            isOutdated: cask.outdated ?? false,
+            appBundleNames: cask.appBundleNames
         )
     }
 

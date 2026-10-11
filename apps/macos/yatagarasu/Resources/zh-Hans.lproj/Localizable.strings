@@ -112,11 +112,13 @@
 "specialty.administration.blurb" = "管理工具、扫描器、签名和设备策略";
 
 /* Installed */
-"installed.subtitle" = "此 Mac 上的 Homebrew 包与 GitHub 安装";
+"installed.subtitle" = "此 Mac 上的应用与软件包，来自 Homebrew、各语言包管理器和 GitHub";
 "installed.action.exportBrewfile" = "导出 Brewfile…";
 "installed.action.rescan" = "重新扫描";
 "installed.action.details" = "详情";
 "installed.action.showInFinder" = "在访达中显示";
+"installed.action.open" = "打开";
+"installed.action.moveToTrash" = "移到废纸篓";
 "installed.filter.label" = "显示";
 "installed.filter.all" = "全部";
 "installed.filter.apps" = "应用";
@@ -135,12 +137,14 @@
 "installed.detail.type" = "类型";
 "installed.detail.available" = "可用版本";
 "installed.detail.about" = "简介";
+"installed.detail.bundleID" = "Bundle ID";
 "installed.empty.title" = "尚未安装任何内容";
 "installed.empty.body" = "通过“装机”安装入门套件，或用 Homebrew 安装软件包后，就会显示在这里。";
 "installed.noMatches.title" = "没有匹配项";
 "installed.noMatches.body" = "没有符合此筛选条件的已安装项目。";
 "installed.uninstall.confirm.title_format" = "要卸载 %@ 吗？";
 "installed.uninstall.confirm.body" = "Homebrew 会将其从此 Mac 移除。你随时可以重新安装。";
+"installed.uninstall.confirm.app.body" = "应用将被移到废纸篓。你可以从废纸篓中恢复，或日后重新安装。";
 
 /* Updates */
 "updates.subtitle.none" = "全部已是最新";
@@ -190,6 +194,22 @@
 "source.homebrewCask.note" = "社区维护的配方，通过 Yatagarasu 更新";
 "source.homebrewFormula.title" = "Homebrew";
 "source.homebrewFormula.note" = "由 Homebrew 维护，通过 Yatagarasu 更新";
+"source.external.unknown.title" = "未知";
+"source.external.appStore.title" = "Mac App Store";
+"source.external.npm.title" = "npm";
+"source.external.pnpm.title" = "pnpm";
+"source.external.yarn.title" = "Yarn";
+"source.external.mise.title" = "mise";
+"source.external.pipx.title" = "pipx";
+"source.external.uv.title" = "uv";
+"source.external.cargo.title" = "Cargo";
+"source.external.bun.title" = "Bun";
+"source.external.setapp.title" = "Setapp";
+"source.external.installerPackage.title" = "安装包";
+"source.external.pip.title" = "pip";
+"source.external.gem.title" = "RubyGems";
+"source.external.rustup.title" = "rustup";
+"installed.detail.installerID_format" = "由安装包 %@ 安装";
 "source.website.title" = "官方网站";
 "source.website.note_format" = "来自 %@ 的安装程序";
 "source.githubRelease.title" = "GitHub 发行版";
