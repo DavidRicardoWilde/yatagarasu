@@ -79,7 +79,10 @@ extension BrewPackage {
             return true
         }
 
-        return installed.contains(where: { $0.installedAsDependency != true })
+        // `brew info --json=v2` only reports `installed_on_request` (read from Homebrew's INSTALL_RECEIPT.json);
+        // `installed_as_dependency` is not in the output, so `false` here is what marks a dependency-only install.
+        // A missing flag comes from a receipt that predates the field, so its origin is unknown and it stays visible.
+        return installed.contains(where: { $0.installedOnRequest == nil && $0.installedAsDependency != true })
     }
 }
 
